@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -202,8 +202,7 @@
             <End Role="PackageStatus" EntitySet="PackageStatus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,6 +232,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PackageStatus" Relationship="Self.FK_PackageStatus_ToTable" FromRole="AspNetUsers" ToRole="PackageStatus" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="PackageStatus1" Relationship="Model.FK_PackageStatus_ToTable1" FromRole="AspNetUser" ToRole="PackageStatu" />
         </EntityType>
         <EntityType Name="DistCentre">
           <Key>
@@ -282,6 +282,7 @@
           <NavigationProperty Name="DistCentre" Relationship="Self.FK_PackageStatus_ToTable_DistCentre_Destination" FromRole="PackageStatus" ToRole="DistCentre" />
           <NavigationProperty Name="DistCentre1" Relationship="Self.FK_PackageStatus_ToTable_DistCentre_Source" FromRole="PackageStatus" ToRole="DistCentre" />
           <NavigationProperty Name="Package" Relationship="Self.FK_PackageStatus_ToTable_Packages" FromRole="PackageStatus" ToRole="Package" />
+          <NavigationProperty Name="AspNetUser1" Relationship="Model.FK_PackageStatus_ToTable1" FromRole="PackageStatu" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_PackageStatus_ToTable">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
@@ -370,7 +371,23 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_PackageStatus_ToTable1" Association="Model.FK_PackageStatus_ToTable1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="PackageStatu" EntitySet="PackageStatus" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_PackageStatus_ToTable1">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="Model.PackageStatu" Role="PackageStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PackageStatu">
+              <PropertyRef Name="StaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -17,6 +17,7 @@
         <AssociationConnector Association="Model.FK_Package_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_PackageStatus_ToTable_Packages" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PackageStatus_ToTable1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

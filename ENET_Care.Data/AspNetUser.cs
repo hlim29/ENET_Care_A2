@@ -18,6 +18,7 @@ namespace ENET_Care.Data
         {
             this.PackageStatus = new HashSet<PackageStatu>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.PackageStatus1 = new HashSet<PackageStatu>();
         }
     
         public string Id { get; set; }
@@ -35,5 +36,6 @@ namespace ENET_Care.Data
     
         public virtual ICollection<PackageStatu> PackageStatus { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<PackageStatu> PackageStatus1 { get; set; }
     }
 }

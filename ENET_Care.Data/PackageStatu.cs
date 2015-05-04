@@ -25,5 +25,6 @@ namespace ENET_Care.Data
         public virtual DistCentre DistCentre { get; set; }
         public virtual DistCentre DistCentre1 { get; set; }
         public virtual Package Package { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
     }
 }
