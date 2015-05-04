@@ -16,8 +16,7 @@ namespace ENET_Care.Data
     {
         public AspNetUser()
         {
-            this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
-            this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.PackageStatus = new HashSet<PackageStatu>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -34,8 +33,7 @@ namespace ENET_Care.Data
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
     
-        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<PackageStatu> PackageStatus { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

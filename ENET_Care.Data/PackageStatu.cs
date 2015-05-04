@@ -12,12 +12,18 @@ namespace ENET_Care.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserLogin
+    public partial class PackageStatu
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public string UserId { get; set; }
+        public int PackageStatusID { get; set; }
+        public Nullable<int> PackageID { get; set; }
+        public Nullable<int> SourceCentreID { get; set; }
+        public Nullable<int> DestinationCentreID { get; set; }
+        public Nullable<int> Status { get; set; }
+        public string StaffID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual DistCentre DistCentre { get; set; }
+        public virtual DistCentre DistCentre1 { get; set; }
+        public virtual Package Package { get; set; }
     }
 }
