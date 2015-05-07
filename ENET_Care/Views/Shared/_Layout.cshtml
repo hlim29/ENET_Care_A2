@@ -20,11 +20,88 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    if (Context.User.IsInRole("agent"))
+                    {
+                        @Html.Raw("<ul class='nav navbar-nav'>")
+                            @Html.Raw("<li><a href='~/'>Home</a></li>")
+                            @Html.Raw("<!--- Register --->")
+                            @Html.Raw("<li id='register'><a href='/Pages/Register.aspx'>Register</a></li>")
+                            @Html.Raw("<!-- Send -->")
+                            @Html.Raw("<li id='send'><a href='/Pages/Send.aspx'>Send</a></li>")
+                            @Html.Raw("<!-- Receive -->")
+                            @Html.Raw("<li id='receive'><a href='/Pages/Receive.aspx'>Receive</a></li>")
+                            @Html.Raw("<!--- Stock --->")
+                            @Html.Raw("<li class='dropdown' id='stock'>")
+                                @Html.Raw("<a class='dropdown-toggle' href='#' role='button' data-toggle='dropdown'>Stock</a>")
+                                @Html.Raw("<ul class='dropdown-menu'>")
+                                    @Html.Raw("<!--- Stocktaking --->")
+                                    @Html.Raw("<li id='stocktaking'><a href='/Pages/Stocktaking.aspx'>Stocktaking</a></li>")
+                                    @Html.Raw("<!--- Discard --->")
+                                    @Html.Raw("<li id='discard'><a href='/Pages/Discard.aspx'>Discard</a></li>")
+                                    @Html.Raw("<!--- Remove loss --->")
+                                    @Html.Raw("<li id='removeLoss'><a href='/Pages/RemoveLoss.aspx'>Remove Loss</a></li>")
+                                @Html.Raw("</ul>")
+                            @Html.Raw("</li>")
+
+                            @Html.Raw("<li id='myinformation'><a href='/Pages/MyInformation.aspx'>MyInformation</a></li>")
+                        @Html.Raw("</ul>")
+                    }
+                    if (Context.User.IsInRole("doctor"))
+                    {
+                         @Html.Raw("<ul class='nav navbar-nav'>")
+                             @Html.Raw("<li><a href='~/'>Home</a></li>")
+                             @Html.Raw("<li id='distribute'><a href='/Pages/Distribute.aspx'>Distribute</a></li>")
+                             @Html.Raw("<!--- Register --->")
+                             @Html.Raw("<li id='register'><a href='/Pages/Register.aspx'>Register</a></li>")
+                             @Html.Raw("<!-- Send -->")
+                             @Html.Raw("<li id='send'><a href='/Pages/Send.aspx'>Send</a></li>")
+                             @Html.Raw("<!-- Receive -->")
+                             @Html.Raw("<li id='receive'><a href='/Pages/Receive.aspx'>Receive</a></li>")
+                             @Html.Raw("<!--- Stock --->")
+                             @Html.Raw("<li class='dropdown' id='stock'>")
+                                 @Html.Raw("<a class='dropdown-toggle' href='#' role='button' data-toggle='dropdown'>Stock</a>")
+                                 @Html.Raw("<ul class='dropdown-menu'>")
+                                     @Html.Raw("<!--- Stocktaking --->")
+                                     @Html.Raw("<li id='stocktaking'><a href='/Pages/Stocktaking.aspx'>Stocktaking</a></li>")
+                                     @Html.Raw("<!--- Discard --->")
+                                     @Html.Raw("<li id='discard'><a href='/Pages/Discard.aspx'>Discard</a></li>")
+                                     @Html.Raw("<!--- Remove loss --->")
+                                     @Html.Raw("<li id='removeLoss'><a href='/Pages/RemoveLoss.aspx'>Remove Loss</a></li>")
+                                 @Html.Raw("</ul>")
+                             @Html.Raw("</li>")
+                             @Html.Raw("<li id='myinformation'><a href='/Pages/MyInformation.aspx'>MyInformation</a></li>")
+                         @Html.Raw("</ul>")
+                    }
+                    if (Context.User.IsInRole("manager"))
+                    {
+                        @Html.Raw("<ul class='nav navbar-nav'>")
+                            @Html.Raw("<li><a href='~/'>Home</a></li>")
+                            @Html.Raw("<!--- Reports --->")
+                            @Html.Raw("<li class='dropdown' id='reportsMenu'>")
+                                @Html.Raw("<a class='dropdown-toggle' href='#' role='button' data-toggle='dropdown'>Reports</a>")
+                                @Html.Raw("<ul class='dropdown-menu'>")
+                                    @Html.Raw("<!--- Distribution Centre Stock --->")
+                                    @Html.Raw("<li id='DCStock'><a href='/Pages/DistributionCentreStockReport.aspx'>Distribution Centre Stock</a></li>")
+
+                                    @Html.Raw("<!--- Distribution Centre Losses --->")
+                                    @Html.Raw("<li id='DCLosses'><a href='/Pages/DistributionCentreLossesReport.aspx'>Distribution Centre Losses</a></li>")
+
+                                    @Html.Raw("<!--- Doctor Activity --->")
+                                    @Html.Raw("<li id='DocActivity'><a href='/Pages/DoctorActivityReport.aspx'>Doctor Activity</a></li>")
+
+                                    @Html.Raw("<!--- Value in Transit --->")
+                                    @Html.Raw("<li id='ValueInTrasit'><a href='/Pages/ValueInTransit.aspx'>Value in Transit</a></li>")
+
+                                    @Html.Raw("<!--- GlobalStock --->")
+                                    @Html.Raw("<li id='GlobalStock'><a href='/Pages/GlobalStock.aspx'>Global Stock</a></li>")
+                                @Html.Raw("</ul>")
+                            @Html.Raw("</li>")
+                            @Html.Raw("<li id='myinformation'><a href='/Pages/MyInformation.aspx'>MyInformation</a></li>")
+                        @Html.Raw("</ul>")
+                    }
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
