@@ -12,7 +12,7 @@ namespace ENET_Care.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class PackageStatu
+    public partial class PackageStatus
     {
         public int PackageStatusID { get; set; }
         public Nullable<int> PackageID { get; set; }
@@ -25,6 +25,6 @@ namespace ENET_Care.Data
         public virtual DistCentre DistCentre { get; set; }
         public virtual DistCentre DistCentre1 { get; set; }
         public virtual Package Package { get; set; }
-        public virtual AspNetUser AspNetUser1 { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ENET_Care.Tests", "ENET_Car
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ENET_Care.Data", "ENET_Care.Data\ENET_Care.Data.csproj", "{77CF588F-6D11-44C5-BA7E-AE50F669CBFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ENET_Care.BusinessLogic", "ENET_Care.BusinessLogic\ENET_Care.BusinessLogic.csproj", "{069FCBB0-181E-40DF-9B13-9D10680F34E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{77CF588F-6D11-44C5-BA7E-AE50F669CBFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77CF588F-6D11-44C5-BA7E-AE50F669CBFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77CF588F-6D11-44C5-BA7E-AE50F669CBFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069FCBB0-181E-40DF-9B13-9D10680F34E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069FCBB0-181E-40DF-9B13-9D10680F34E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069FCBB0-181E-40DF-9B13-9D10680F34E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069FCBB0-181E-40DF-9B13-9D10680F34E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

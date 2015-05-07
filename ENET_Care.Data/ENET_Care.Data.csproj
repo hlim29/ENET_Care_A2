@@ -78,10 +78,12 @@
     <Compile Include="PackageStandardType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackageStatu.cs">
+    <Compile Include="PackageStatus.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs" />
+    <Compile Include="Status.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

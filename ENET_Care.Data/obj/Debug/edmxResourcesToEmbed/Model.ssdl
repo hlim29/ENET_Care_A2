@@ -1,40 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="__MigrationHistory">
-    <Key>
-      <PropertyRef Name="MigrationId" />
-      <PropertyRef Name="ContextKey" />
-    </Key>
-    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-  </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AspNetUserClaims">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ClaimType" Type="nvarchar(max)" />
-    <Property Name="ClaimValue" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="AspNetUserLogins">
-    <Key>
-      <PropertyRef Name="LoginProvider" />
-      <PropertyRef Name="ProviderKey" />
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUserRoles">
     <Key>
@@ -49,6 +20,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="256" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="256" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
     <Property Name="PasswordHash" Type="nvarchar(max)" />
@@ -60,32 +33,64 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="CentreId" Type="int" />
   </EntityType>
-  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+  <EntityType Name="DistCentre">
+    <Key>
+      <PropertyRef Name="CentreId" />
+    </Key>
+    <Property Name="CentreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CentreName" Type="varchar" MaxLength="50" />
+    <Property Name="CentreAddress" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackageId" />
+    </Key>
+    <Property Name="PackageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageStandardTypeId" Type="int" />
+    <Property Name="ExpiryDate" Type="date" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="PackageStandardType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Cost" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="IsTempSensitive" Type="bit" />
+    <Property Name="ShelfLife" Type="int" />
+  </EntityType>
+  <EntityType Name="PackageStatus">
+    <Key>
+      <PropertyRef Name="PackageStatusID" />
+    </Key>
+    <Property Name="PackageStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageID" Type="int" />
+    <Property Name="SourceCentreID" Type="int" />
+    <Property Name="DestinationCentreID" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="StaffID" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AspNetUsers_ToDistCentre">
+    <End Role="DistCentre" Type="Self.DistCentre" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
+      <Principal Role="DistCentre">
+        <PropertyRef Name="CentreId" />
       </Principal>
-      <Dependent Role="AspNetUserClaims">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUserLogins">
-        <PropertyRef Name="UserId" />
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="CentreId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -117,20 +122,90 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Package_ToTable">
+    <End Role="PackageStandardType" Type="Self.PackageStandardType" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackageStandardType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="PackageStandardTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackageStatus_ToTable">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PackageStatus">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackageStatus_ToTable_DistCentre_Destination">
+    <End Role="DistCentre" Type="Self.DistCentre" Multiplicity="0..1" />
+    <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DistCentre">
+        <PropertyRef Name="CentreId" />
+      </Principal>
+      <Dependent Role="PackageStatus">
+        <PropertyRef Name="DestinationCentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackageStatus_ToTable_DistCentre_Source">
+    <End Role="DistCentre" Type="Self.DistCentre" Multiplicity="0..1" />
+    <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DistCentre">
+        <PropertyRef Name="CentreId" />
+      </Principal>
+      <Dependent Role="PackageStatus">
+        <PropertyRef Name="SourceCentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackageStatus_ToTable_Packages">
+    <End Role="Package" Type="Self.Package" Multiplicity="0..1" />
+    <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="PackageStatus">
+        <PropertyRef Name="PackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackageStatus_ToTable_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="PackageStatus">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ModelStoreContainer">
-    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <EntitySet Name="DistCentre" EntityType="Self.DistCentre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PackageStandardType" EntityType="Self.PackageStandardType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PackageStatus" EntityType="Self.PackageStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AspNetUsers_ToDistCentre" Association="Self.FK_AspNetUsers_ToDistCentre">
+      <End Role="DistCentre" EntitySet="DistCentre" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -139,6 +214,30 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_ToTable" Association="Self.FK_Package_ToTable">
+      <End Role="PackageStandardType" EntitySet="PackageStandardType" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackageStatus_ToTable" Association="Self.FK_PackageStatus_ToTable">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="PackageStatus" EntitySet="PackageStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackageStatus_ToTable_DistCentre_Destination" Association="Self.FK_PackageStatus_ToTable_DistCentre_Destination">
+      <End Role="DistCentre" EntitySet="DistCentre" />
+      <End Role="PackageStatus" EntitySet="PackageStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackageStatus_ToTable_DistCentre_Source" Association="Self.FK_PackageStatus_ToTable_DistCentre_Source">
+      <End Role="DistCentre" EntitySet="DistCentre" />
+      <End Role="PackageStatus" EntitySet="PackageStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackageStatus_ToTable_Packages" Association="Self.FK_PackageStatus_ToTable_Packages">
+      <End Role="Package" EntitySet="Package" />
+      <End Role="PackageStatus" EntitySet="PackageStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackageStatus_ToTable_Status" Association="Self.FK_PackageStatus_ToTable_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="PackageStatus" EntitySet="PackageStatus" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

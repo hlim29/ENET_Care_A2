@@ -105,6 +105,5 @@ C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.O
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.csprojResolveAssemblyReference.cache
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.dll
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.pdb

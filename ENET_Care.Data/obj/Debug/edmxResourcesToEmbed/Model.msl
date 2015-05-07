@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="Model.C__MigrationHistory">
-        <MappingFragment StoreEntitySet="__MigrationHistory">
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="Model.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
@@ -19,28 +9,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="Model.AspNetUserClaim">
-        <MappingFragment StoreEntitySet="AspNetUserClaims">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="Model.AspNetUserLogin">
-        <MappingFragment StoreEntitySet="AspNetUserLogins">
-          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="Model.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="CentreId" ColumnName="CentreId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -56,6 +30,38 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DistCentres">
+      <EntityTypeMapping TypeName="Model.DistCentre">
+        <MappingFragment StoreEntitySet="DistCentre">
+          <ScalarProperty Name="CentreId" ColumnName="CentreId" />
+          <ScalarProperty Name="CentreName" ColumnName="CentreName" />
+          <ScalarProperty Name="CentreAddress" ColumnName="CentreAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="Model.Package">
+        <MappingFragment StoreEntitySet="Package">
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="PackageStandardTypeId" ColumnName="PackageStandardTypeId" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackageStandardTypes">
+      <EntityTypeMapping TypeName="Model.PackageStandardType">
+        <MappingFragment StoreEntitySet="PackageStandardType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="IsTempSensitive" ColumnName="IsTempSensitive" />
+          <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -64,5 +70,25 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="Model.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackageStatus1">
+      <EntityTypeMapping TypeName="Model.PackageStatus">
+        <MappingFragment StoreEntitySet="PackageStatus">
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DestinationCentreID" ColumnName="DestinationCentreID" />
+          <ScalarProperty Name="SourceCentreID" ColumnName="SourceCentreID" />
+          <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+          <ScalarProperty Name="PackageStatusID" ColumnName="PackageStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

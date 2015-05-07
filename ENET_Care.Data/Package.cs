@@ -16,7 +16,7 @@ namespace ENET_Care.Data
     {
         public Package()
         {
-            this.PackageStatus = new HashSet<PackageStatu>();
+            this.PackageStatus = new HashSet<PackageStatus>();
         }
     
         public int PackageId { get; set; }
@@ -25,6 +25,6 @@ namespace ENET_Care.Data
         public Nullable<int> Quantity { get; set; }
     
         public virtual PackageStandardType PackageStandardType { get; set; }
-        public virtual ICollection<PackageStatu> PackageStatus { get; set; }
+        public virtual ICollection<PackageStatus> PackageStatus { get; set; }
     }
 }
