@@ -107,3 +107,4 @@ C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.T
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.dll
 C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.pdb
+C:\Users\Henry\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.csprojResolveAssemblyReference.cache
