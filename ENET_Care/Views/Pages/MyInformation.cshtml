@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "MyInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MyInformation</h2>
+
+<h4>First Name:</h4>
+<input type="text" name="FirstName" />
+
+<br />
+
+<h4>Last Name:</h4>
+<input type="text" name="LastName" />
+
+<br />
+
+<h4>Email:</h4>
+<input type="text" name="Email" />
+
+<br />
+
+<h4>Dist. Centre</h4>
+<select>
+    <option value="HeadOffice">Head Office</option>
+    <option value="Melbourne">Melbourne</option>
+    <option value="Sydney">Sydney</option>
+    <option value="Perth">Perth</option>
+</select>
+
+<br />
+
+<input type="button" value="Change Password" />
+
+<br />
+
+<h4>Old Password:</h4>
+<input type="password" name="OldPassword" />
+
+<br />
+
+<h4>New Password</h4>
+<input type="password" name="NewPassword" />
+
+<br />
+
+<h4>Confirm New Password</h4>
+<input type="password" name="ConfirmNewPassword" />
+
+<br />
+
+<input type="reset" value="Cancel" runat="server" />
+<input type="button" value="Save" runat="server" />

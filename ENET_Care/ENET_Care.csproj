@@ -160,7 +160,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,10 +221,24 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Layout\_LayoutView.cshtml" />
+    <Content Include="Views\Receive.cshtml" />
+    <Content Include="Views\Pages\Receive.cshtml" />
+    <Content Include="Views\Pages\Send.cshtml" />
+    <Content Include="Views\Pages\Register.cshtml" />
+    <Content Include="Views\Pages\Stocktaking.cshtml" />
+    <Content Include="Views\Pages\Discard.cshtml" />
+    <Content Include="Views\Pages\RemoveLoss.cshtml" />
+    <Content Include="Views\Pages\Distribute.cshtml" />
+    <None Include="Views\Pages\MyInformation.cshtml" />
+    <Content Include="Views\Reports\DistributionCentreStockReport.cshtml" />
+    <Content Include="Views\Reports\DistributionCentreLossesReport.cshtml" />
+    <Content Include="Views\Reports\DoctorActivityReport.cshtml" />
+    <Content Include="Views\Reports\ValueInTransit.cshtml" />
+    <Content Include="Views\Reports\GlobalStock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Layout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
