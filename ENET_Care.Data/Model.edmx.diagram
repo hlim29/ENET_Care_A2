@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="111c71a5b1604ddea436f96d5d85636a" Name="Diagram1" ZoomLevel="101">
-        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.625" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="2.5" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DistCentre" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Package" Width="1.5" PointX="4.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PackageStandardType" Width="1.5" PointX="6.875" PointY="4.5" IsExpanded="true" />
+      <Diagram DiagramId="3e34b5cc88e54fc1b5df74022a1891b8" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DistCentre" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Package" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PackageStandardType" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PackageStatu" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AspNetUsers_ToDistCentre" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PackageStatus_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_DistCentre_Destination" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_DistCentre_Source" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Package_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_Status" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_AspNetUsers_ToDistCentre" />
-        <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="6.125" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.PackageStatus" Width="1.5" PointX="4.375" PointY="0.625" />
-        <AssociationConnector Association="Model.FK_PackageStatus_ToTable" />
-        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_DistCentre_Destination" />
-        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_DistCentre_Source" />
-        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_Packages" />
-        <AssociationConnector Association="Model.FK_PackageStatus_ToTable_Status" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

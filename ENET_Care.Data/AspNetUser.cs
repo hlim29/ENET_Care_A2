@@ -16,11 +16,14 @@ namespace ENET_Care.Data
     {
         public AspNetUser()
         {
+            this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.PackageStatus = new HashSet<PackageStatu>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.PackageStatus = new HashSet<PackageStatus>();
         }
     
         public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
@@ -32,12 +35,11 @@ namespace ENET_Care.Data
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public Nullable<int> CentreId { get; set; }
     
-        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DistCentre DistCentre { get; set; }
-        public virtual ICollection<PackageStatus> PackageStatus { get; set; }
+        public virtual ICollection<PackageStatu> PackageStatus { get; set; }
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }
