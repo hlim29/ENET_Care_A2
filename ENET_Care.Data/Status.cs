@@ -16,12 +16,12 @@ namespace ENET_Care.Data
     {
         public Status()
         {
-            this.PackageStatus = new HashSet<PackageStatu>();
+            this.PackageStatus = new HashSet<PackageStatus>();
         }
     
         public int StatusId { get; set; }
         public string StatusName { get; set; }
     
-        public virtual ICollection<PackageStatu> PackageStatus { get; set; }
+        public virtual ICollection<PackageStatus> PackageStatus { get; set; }
     }
 }

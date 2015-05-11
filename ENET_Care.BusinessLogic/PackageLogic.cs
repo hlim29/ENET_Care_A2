@@ -18,8 +18,10 @@ namespace ENET_Care.BusinessLogic
         {
             if (expiryDate < DateTime.Now)
                 return Result.PastDate;
-            else
+            else if (expiryDate > DateTime.Now)
                 return Result.Ok;
+            else
+                return Result.NoDate;
         }
         public static void AddPackage(Package package)
         {
@@ -30,6 +32,12 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Registers the package to the system and returns the barcode
+        /// </summary>
+        /// <param name="expiryDate">Expiry date of the package</param>
+        /// <param name="medicationId">The medication ID</param>
+        /// <returns>Barcode</returns>
         public static int RegisterPackage(DateTime expiryDate, int medicationId)
         {
             Package p = new Package();
@@ -47,7 +55,6 @@ namespace ENET_Care.BusinessLogic
                 }
             }
             return result;
-            //System.Diagnostics.Debug.WriteLine(ValidateInput(expiryDate, medicationId).ToString());
         }
 
         public static Dictionary<int, string> GetMedicationTypes()
@@ -61,9 +68,7 @@ namespace ENET_Care.BusinessLogic
                 {
                     result.Add(p.Id, p.Description);
                 }
-
             }
-
             return result;
         }
 
@@ -89,6 +94,11 @@ namespace ENET_Care.BusinessLogic
             return result;
         }
 
+        /// <summary>
+        /// Returns the package which barcode matches with the parameter
+        /// </summary>
+        /// <param name="barcode">The barcode of the package</param>
+        /// <returns>The package</returns>
         public static Package GetPackageByBarcode(int barcode)
         {
             using (var context = new Entities())
@@ -96,7 +106,6 @@ namespace ENET_Care.BusinessLogic
                 var query = from package in context.Packages where package.PackageId == barcode select package;
                 return query.First();
             }
-            //return new Package().GetPackageByBarcode(barcode);
         }
 
         public static List<Package> GetPackagesByDistCentre(int centreId)
@@ -106,7 +115,6 @@ namespace ENET_Care.BusinessLogic
                 var query = from package in context.PackageStatus where package.DestinationCentreID == centreId select package.Package;
                 return query.ToList();
             }
-            //return new Package().GetPackagesByDistCentre(centreId);
         }
     }
 }

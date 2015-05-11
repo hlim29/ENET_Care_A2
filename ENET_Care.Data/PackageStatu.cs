@@ -12,7 +12,7 @@ namespace ENET_Care.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class PackageStatu
+    public partial class PackageStatus
     {
         public int PackageStatusID { get; set; }
         public Nullable<int> PackageID { get; set; }

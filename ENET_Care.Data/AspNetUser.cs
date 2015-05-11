@@ -17,7 +17,7 @@ namespace ENET_Care.Data
         public AspNetUser()
         {
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            this.PackageStatus = new HashSet<PackageStatu>();
+            this.PackageStatus = new HashSet<PackageStatus>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -39,7 +39,7 @@ namespace ENET_Care.Data
     
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DistCentre DistCentre { get; set; }
-        public virtual ICollection<PackageStatu> PackageStatus { get; set; }
+        public virtual ICollection<PackageStatus> PackageStatus { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

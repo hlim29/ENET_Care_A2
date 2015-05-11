@@ -31,7 +31,7 @@ namespace ENET_Care.Data
         public virtual DbSet<DistCentre> DistCentres { get; set; }
         public virtual DbSet<Package> Packages { get; set; }
         public virtual DbSet<PackageStandardType> PackageStandardTypes { get; set; }
-        public virtual DbSet<PackageStatu> PackageStatus { get; set; }
+        public virtual DbSet<PackageStatus> PackageStatus { get; set; }
         public virtual DbSet<Status> Status { get; set; }
     }
 }

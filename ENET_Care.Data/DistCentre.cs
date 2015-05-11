@@ -17,8 +17,7 @@ namespace ENET_Care.Data
         public DistCentre()
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
-            this.PackageStatus = new HashSet<PackageStatu>();
-            this.PackageStatus1 = new HashSet<PackageStatu>();
+            this.PackageStatus = new HashSet<PackageStatus>();
         }
     
         public int CentreId { get; set; }
@@ -27,7 +26,6 @@ namespace ENET_Care.Data
         public string PhoneNumber { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
-        public virtual ICollection<PackageStatu> PackageStatus { get; set; }
-        public virtual ICollection<PackageStatu> PackageStatus1 { get; set; }
+        public virtual ICollection<PackageStatus> PackageStatus { get; set; }
     }
 }
