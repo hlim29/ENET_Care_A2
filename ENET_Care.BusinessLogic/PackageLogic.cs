@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ENET_Care.BusinessLogic
 {
-    class PackageLogic
+    public class PackageLogic
     {
         public enum Result
         {
