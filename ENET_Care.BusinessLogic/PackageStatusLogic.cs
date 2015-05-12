@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ENET_Care.BusinessLogic
 {
-    class PackageStatusLogic
+    public class PackageStatusLogic
     {
         /// <summary>
         /// An enum used for determining the status of a package. Synchronised with the DB, 'Status' table.
@@ -43,6 +43,7 @@ namespace ENET_Care.BusinessLogic
 
         public static void DiscardPackage(int packageId, string staffId)
         {
+           // AppDomain.CurrentDomain.SetData("DataDirectory", "../../ENET.MedTrack.Web/App_Data");
             AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 

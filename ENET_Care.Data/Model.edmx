@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -274,8 +274,7 @@
             <End Role="PackageStatus" EntitySet="PackageStatus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -357,7 +356,7 @@
           <Property Name="ShelfLife" Type="Int32" />
           <NavigationProperty Name="Packages" Relationship="Self.FK_Package_ToTable" FromRole="PackageStandardType" ToRole="Package" />
         </EntityType>
-        <EntityType Name="PackageStatu">
+        <EntityType Name="PackageStatus">
           <Key>
             <PropertyRef Name="PackageStatusID" />
           </Key>
@@ -409,7 +408,7 @@
         </Association>
         <Association Name="FK_PackageStatus_ToTable">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="PackageStatus" Type="Self.PackageStatu" Multiplicity="*" />
+          <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -421,7 +420,7 @@
         </Association>
         <Association Name="FK_PackageStatus_ToTable_DistCentre_Destination">
           <End Role="DistCentre" Type="Self.DistCentre" Multiplicity="0..1" />
-          <End Role="PackageStatus" Type="Self.PackageStatu" Multiplicity="*" />
+          <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DistCentre">
               <PropertyRef Name="CentreId" />
@@ -433,7 +432,7 @@
         </Association>
         <Association Name="FK_PackageStatus_ToTable_DistCentre_Source">
           <End Role="DistCentre" Type="Self.DistCentre" Multiplicity="0..1" />
-          <End Role="PackageStatus" Type="Self.PackageStatu" Multiplicity="*" />
+          <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DistCentre">
               <PropertyRef Name="CentreId" />
@@ -457,7 +456,7 @@
         </Association>
         <Association Name="FK_PackageStatus_ToTable_Packages">
           <End Role="Package" Type="Self.Package" Multiplicity="0..1" />
-          <End Role="PackageStatus" Type="Self.PackageStatu" Multiplicity="*" />
+          <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Package">
               <PropertyRef Name="PackageId" />
@@ -469,7 +468,7 @@
         </Association>
         <Association Name="FK_PackageStatus_ToTable_Status">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
-          <End Role="PackageStatus" Type="Self.PackageStatu" Multiplicity="*" />
+          <End Role="PackageStatus" Type="Self.PackageStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
               <PropertyRef Name="StatusId" />
@@ -490,7 +489,7 @@
           <EntitySet Name="DistCentres" EntityType="Self.DistCentre" />
           <EntitySet Name="Packages" EntityType="Self.Package" />
           <EntitySet Name="PackageStandardTypes" EntityType="Self.PackageStandardType" />
-          <EntitySet Name="PackageStatus" EntityType="Self.PackageStatu" />
+          <EntitySet Name="PackageStatus" EntityType="Self.PackageStatus" />
           <EntitySet Name="Status" EntityType="Self.Status" />
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -606,7 +605,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PackageStatus">
-            <EntityTypeMapping TypeName="Model.PackageStatu">
+            <EntityTypeMapping TypeName="Model.PackageStatus">
               <MappingFragment StoreEntitySet="PackageStatus">
                 <ScalarProperty Name="PackageStatusID" ColumnName="PackageStatusID" />
                 <ScalarProperty Name="PackageID" ColumnName="PackageID" />

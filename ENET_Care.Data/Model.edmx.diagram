@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="Model.DistCentre" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Package" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PackageStandardType" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PackageStatu" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PackageStatus" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AspNetUsers_ToDistCentre" ManuallyRouted="false" />

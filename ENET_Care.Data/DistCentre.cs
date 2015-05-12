@@ -27,5 +27,6 @@ namespace ENET_Care.Data
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual ICollection<PackageStatus> PackageStatus { get; set; }
+        public virtual ICollection<PackageStatus> PackageStatus1 { get; set; }
     }
 }

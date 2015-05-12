@@ -32,5 +32,10 @@ namespace ENET_Care.Tests
             PackageLogic.Result result = PackageLogic.ValidateInput(errorDate);
             Assert.AreEqual(PackageLogic.Result.PastDate, result);
         }
+        [TestMethod]
+        public void PackageTest_DiscardNonExistantPackage()
+        {
+            PackageStatusLogic.DiscardPackage(100000, "y783156");
+        }
     }
 }

@@ -72,7 +72,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PackageStatus">
-      <EntityTypeMapping TypeName="Model.PackageStatu">
+      <EntityTypeMapping TypeName="Model.PackageStatus">
         <MappingFragment StoreEntitySet="PackageStatus">
           <ScalarProperty Name="PackageStatusID" ColumnName="PackageStatusID" />
           <ScalarProperty Name="PackageID" ColumnName="PackageID" />
