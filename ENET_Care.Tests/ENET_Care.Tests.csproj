@@ -33,6 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -84,6 +91,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="PackageTest.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -92,6 +101,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ENET_Care.BusinessLogic\ENET_Care.BusinessLogic.csproj">
+      <Project>{84a8cc95-db1d-4ceb-af71-5e40dae2a089}</Project>
+      <Name>ENET_Care.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ENET_Care.Data\ENET_Care.Data.csproj">
+      <Project>{77cf588f-6d11-44c5-ba7e-ae50f669cbfc}</Project>
+      <Name>ENET_Care.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ENET_Care\ENET_Care.csproj">
       <Project>{26BD7965-B698-4372-B777-C15AB228CD56}</Project>
       <Name>ENET_Care</Name>

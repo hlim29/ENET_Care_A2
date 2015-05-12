@@ -18,7 +18,6 @@ namespace ENET_Care.Data
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
             this.PackageStatus = new HashSet<PackageStatus>();
-            this.PackageStatus1 = new HashSet<PackageStatus>();
         }
     
         public int CentreId { get; set; }
