@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="PackageLogic.cs" />
     <Compile Include="PackageStatusLogic.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

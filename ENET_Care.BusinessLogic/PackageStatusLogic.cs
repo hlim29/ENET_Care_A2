@@ -25,6 +25,8 @@ namespace ENET_Care.BusinessLogic
         };
         public static void RegisterArrival(int packageId, int centreId, string staffId)
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
+        
             PackageStatus p = new PackageStatus();
             p.PackageID = packageId;
             p.DestinationCentreID = centreId;
@@ -42,11 +44,11 @@ namespace ENET_Care.BusinessLogic
             AlterPackage(packageId, staffId, StatusEnum.Received);
         }
 
-        public static void DiscardPackage(int packageId, string staffId)
+        public static PackageStatus DiscardPackage(int packageId, string staffId)
         {
             AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
         
-            AlterPackage(packageId, staffId, StatusEnum.Discarded);
+            return AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 
         public static void DistributePackage(int packageId, string staffId)
@@ -61,33 +63,44 @@ namespace ENET_Care.BusinessLogic
         /// <param name="packageId">ID of the package</param>
         /// <param name="staffId">ID of the staff</param>
         /// <param name="status">The new package status</param>
-        public static void AlterPackage(int packageId, string staffId, StatusEnum status)
+        public static PackageStatus AlterPackage(int packageId, string staffId, StatusEnum status)
         {
             using (var context = new Entities())
             {
-                var query = from p in context.PackageStatus where p.PackageID == packageId select p;
+                 //Non-existent packages may be entered by the user, hence the try catch block
+                try
+                {
+                    var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
+                    int centreId = (int)staffCentreQuery.FirstOrDefault().CentreId;
 
-                var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
-                int centreId = (int)staffCentreQuery.First().CentreId;
+                    PackageStatus currentPackageStatus = GetPackageStatusById(packageId);
+                    currentPackageStatus.StaffID = staffId;
+                    currentPackageStatus.DestinationCentreID = centreId;
+                    currentPackageStatus.Status = (int)status;
+                    context.SaveChanges();
 
-                PackageStatus currentPackageStatus = query.First();
-                currentPackageStatus.StaffID = staffId;
-                currentPackageStatus.DestinationCentreID = centreId;
-                currentPackageStatus.Status = (int)status;
-                context.SaveChanges();
+                    return currentPackageStatus;
+                }
+                //Prevents exceptions from non-existent packages
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+                
             }
+            
         }
 
         public static void SendPackage(int source, int destination, string staffId, int packageId)
         {
             using (var context = new Entities())
             {
-                var query = from p in context.PackageStatus where p.PackageID == packageId select p;
-
+                //var query = from p in context.PackageStatus where p.PackageID == packageId select p;
+                //PackageStatus 
                 var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
                 int centreId = (int)staffCentreQuery.First().CentreId;
 
-                PackageStatus currentPackageStatus = query.First();
+                PackageStatus currentPackageStatus = GetPackageStatusById(packageId);
                 currentPackageStatus.StaffID = staffId;
                 currentPackageStatus.SourceCentreID = centreId;
                 currentPackageStatus.DestinationCentreID = destination;

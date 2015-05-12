@@ -25,17 +25,17 @@ namespace ENET_Care.Tests
             Assert.AreEqual(PackageLogic.Result.Ok, result);
         }
 
-        [TestMethod]
-        public void PackageTest_ExpirationDateTest_CurrentDate()
-        {
-            DateTime errorDate = DateTime.Now;
-            PackageLogic.Result result = PackageLogic.ValidateInput(errorDate);
-            Assert.AreEqual(PackageLogic.Result.PastDate, result);
-        }
+
         [TestMethod]
         public void PackageTest_DiscardNonExistantPackage()
         {
-            PackageStatusLogic.DiscardPackage(100000, "y783156");
+            Assert.AreEqual(PackageStatusLogic.DiscardPackage(100000, "y783156"),null);
+        }
+
+        [TestMethod]
+        public void PackageTest_RegisterInvalidStatus()
+        {
+            PackageStatusLogic.RegisterArrival(892417, 12489, "no one");
         }
     }
 }
