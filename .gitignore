@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ENET_Care.BusinessLogic/bin/Debug
+/ENET_Care.BusinessLogic/obj/Debug

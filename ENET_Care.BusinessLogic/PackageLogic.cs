@@ -72,6 +72,10 @@ namespace ENET_Care.BusinessLogic
             return result;
         }
 
+        /// <summary>
+        /// Returns a list of all package standard types, i.e. medications
+        /// </summary>
+        /// <returns>List</returns>
         public static List<PackageStandardType> GetMedicationList()
         {
             using (var context = new Entities())

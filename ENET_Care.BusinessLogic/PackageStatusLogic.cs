@@ -9,6 +9,10 @@ namespace ENET_Care.BusinessLogic
 {
     class PackageStatusLogic
     {
+        /// <summary>
+        /// An enum used for determining the status of a package. Synchronised with the DB, 'Status' table.
+        /// DO NOT CHANGE THIS! I'm serious! >:(
+        /// </summary>
         public enum StatusEnum
         {
             InTransit = 1,
@@ -24,6 +28,7 @@ namespace ENET_Care.BusinessLogic
             p.PackageID = packageId;
             p.DestinationCentreID = centreId;
             p.StaffID = staffId;
+            p.Status = (int)StatusEnum.InStock;
             using (var context = new Entities())
             {
                 context.PackageStatus.Add(p);
@@ -33,23 +38,27 @@ namespace ENET_Care.BusinessLogic
 
         public static void ReceivePackage(int packageId, string staffId)
         {
-            using (var context = new Entities())
-            {
-                var query = from p in context.PackageStatus where p.PackageID == packageId select p;
+            AlterPackage(packageId, staffId, StatusEnum.Received);
+        }
 
-                var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
-                int centreId = (int)staffCentreQuery.First().CentreId;
-
-                PackageStatus currentPackageStatus = query.First();
-                currentPackageStatus.StaffID = staffId;
-                currentPackageStatus.DestinationCentreID = centreId;
-                currentPackageStatus.Status = (int)StatusEnum.InStock;
-                context.SaveChanges();
-            }
-            //new PackageStatus().ReceivePackage(packageId, staffId);
+        public static void DiscardPackage(int packageId, string staffId)
+        {
+            AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 
         public static void DistributePackage(int packageId, string staffId)
+        {
+            AlterPackage(packageId, staffId, StatusEnum.Distributed);
+        }
+
+        /// <summary>
+        /// Alters the package state. Created because receiving, discarding and distributing do essentially
+        /// the same thing - find the package Id, update the staff and status of it.
+        /// </summary>
+        /// <param name="packageId">ID of the package</param>
+        /// <param name="staffId">ID of the staff</param>
+        /// <param name="status">The new package status</param>
+        public static void AlterPackage(int packageId, string staffId, StatusEnum status)
         {
             using (var context = new Entities())
             {
@@ -61,7 +70,7 @@ namespace ENET_Care.BusinessLogic
                 PackageStatus currentPackageStatus = query.First();
                 currentPackageStatus.StaffID = staffId;
                 currentPackageStatus.DestinationCentreID = centreId;
-                currentPackageStatus.Status = (int)StatusEnum.Distributed;
+                currentPackageStatus.Status = (int)status;
                 context.SaveChanges();
             }
         }
@@ -102,6 +111,11 @@ namespace ENET_Care.BusinessLogic
             return GetPackagesListByStatus(StatusEnum.InTransit);
         }
 
+        /// <summary>
+        /// Retrives a list of Packages by the status parameter. This method was created to reduce repetitive code.
+        /// </summary>
+        /// <param name="status">The status of packages to retrieve</param>
+        /// <returns>List of packages</returns>
         public static List<Package> GetPackagesListByStatus(StatusEnum status)
         {
             using (var context = new Entities())
@@ -117,15 +131,6 @@ namespace ENET_Care.BusinessLogic
             return (new PackageStatus().CountPackageById(packageId) == 1);
         }
 
-        
-
-        //Auto-Generated Method
-
-        public static void DiscardPackageStatus(int centreId, int barcode, string staffId)
-        {
-            new PackageStatus().UpdatePackageStatusByBarcodeAndCentreId((int)StatusEnum.Discard, staffId, centreId, barcode);
-
-        }
 
         public static bool IsPackageInStock(int barcode)
         {
@@ -148,15 +153,6 @@ namespace ENET_Care.BusinessLogic
             return result;
         }
 
-        public static System.Data.DataSet GetAllLostPackages()
-        {
-            return new PackageStatus().GetLostPackages();
-        }
-
-        public static System.Data.DataSet GetInTransitPackages()
-        {
-            return new PackageStatus().GetInTransitPackages();
-        }
          * */
     }
 }
