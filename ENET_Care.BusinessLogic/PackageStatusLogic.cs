@@ -1,6 +1,7 @@
 ﻿using ENET_Care.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,8 @@ namespace ENET_Care.BusinessLogic
 
         public static void DiscardPackage(int packageId, string staffId)
         {
-           // AppDomain.CurrentDomain.SetData("DataDirectory", "../../ENET.MedTrack.Web/App_Data");
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
+        
             AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 
