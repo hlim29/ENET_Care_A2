@@ -160,6 +160,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,6 +230,8 @@
     <Content Include="Views\Pages\Discard.cshtml" />
     <Content Include="Views\Pages\RemoveLoss.cshtml" />
     <Content Include="Views\Pages\Distribute.cshtml" />
+    <Content Include="Views\Package.cshtml" />
+    <Content Include="Views\Package\Register.cshtml" />
     <None Include="Views\Pages\MyInformation.cshtml" />
     <Content Include="Views\Reports\DistributionCentreStockReport.cshtml" />
     <Content Include="Views\Reports\DistributionCentreLossesReport.cshtml" />

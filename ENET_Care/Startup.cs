@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System;
+using System.IO;
 
 [assembly: OwinStartupAttribute(typeof(ENET_Care.Startup))]
 namespace ENET_Care
@@ -11,6 +13,9 @@ namespace ENET_Care
     {
         public void Configuration(IAppBuilder app)
         {
+            string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\ENET_Care\App_Data"));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             ConfigureAuth(app);
 
             var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
