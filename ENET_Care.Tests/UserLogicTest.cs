@@ -12,7 +12,7 @@ namespace ENET_Care.Tests
         [TestMethod]
         public void UserTest_GetUserById_getFirstUser()
         {
-            AspNetUser user = UserLogic.GetUserById("35cd70ce-35f4-4cb9-8de2-262208cdfe55");
+            AspNetUser user = UserLogic.GetUserById("3240a097-a1ca-400a-b88b-0847a35e7aad");
             Debug.WriteLine(user.Email);
             Assert.AreNotEqual(null, user);
         }

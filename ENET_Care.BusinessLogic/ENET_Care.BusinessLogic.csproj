@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DistCentreLogic.cs" />
     <Compile Include="PackageLogic.cs" />
     <Compile Include="PackageStatusLogic.cs" />
     <Compile Include="UserLogic.cs" />
