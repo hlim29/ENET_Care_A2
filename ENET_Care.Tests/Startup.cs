@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace ENET_Care.Tests
 {
+    [TestClass]
     class Startup
     {
         [AssemblyInitialize]
         public static void SetupDataDirectory(TestContext context)
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\..\..\"));
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
+            //AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\..\..\"));
         }
     }
 }

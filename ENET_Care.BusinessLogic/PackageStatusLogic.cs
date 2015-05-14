@@ -37,21 +37,21 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
-        public static void ReceivePackage(int packageId, string staffId)
+        public static PackageStatus ReceivePackage(int packageId, string staffId)
         {
-            AlterPackage(packageId, staffId, StatusEnum.Received);
+            return AlterPackage(packageId, staffId, StatusEnum.Received);
         }
 
-        public static void DiscardPackage(int packageId, string staffId)
+        public static PackageStatus DiscardPackage(int packageId, string staffId)
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
-        
-            AlterPackage(packageId, staffId, StatusEnum.Discarded);
+
+
+            return AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 
-        public static void DistributePackage(int packageId, string staffId)
+        public static PackageStatus DistributePackage(int packageId, string staffId)
         {
-            AlterPackage(packageId, staffId, StatusEnum.Distributed);
+            return AlterPackage(packageId, staffId, StatusEnum.Distributed);
         }
 
         /// <summary>
@@ -61,20 +61,27 @@ namespace ENET_Care.BusinessLogic
         /// <param name="packageId">ID of the package</param>
         /// <param name="staffId">ID of the staff</param>
         /// <param name="status">The new package status</param>
-        public static void AlterPackage(int packageId, string staffId, StatusEnum status)
+        public static PackageStatus AlterPackage(int packageId, string staffId, StatusEnum status)
         {
             using (var context = new Entities())
             {
-                var query = from p in context.PackageStatus where p.PackageID == packageId select p;
+                try
+                {
+                    var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
+                    int centreId = (int)staffCentreQuery.FirstOrDefault().CentreId;
 
-                var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
-                int centreId = (int)staffCentreQuery.First().CentreId;
+                    PackageStatus currentPackageStatus = GetPackageStatusById(packageId);
+                    currentPackageStatus.StaffID = staffId;
+                    currentPackageStatus.DestinationCentreID = centreId;
+                    currentPackageStatus.Status = (int)status;
+                    context.SaveChanges();
 
-                PackageStatus currentPackageStatus = query.First();
-                currentPackageStatus.StaffID = staffId;
-                currentPackageStatus.DestinationCentreID = centreId;
-                currentPackageStatus.Status = (int)status;
-                context.SaveChanges();
+                    return currentPackageStatus;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
         }
 

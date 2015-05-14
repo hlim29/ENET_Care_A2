@@ -35,7 +35,7 @@ namespace ENET_Care.Tests
         [TestMethod]
         public void PackageTest_DiscardNonExistantPackage()
         {
-            PackageStatusLogic.DiscardPackage(100000, "y783156");
+            Assert.IsNull(PackageStatusLogic.DiscardPackage(100000, "y783156"));
         }
     }
 }
