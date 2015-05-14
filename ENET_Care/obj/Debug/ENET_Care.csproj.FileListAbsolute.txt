@@ -218,3 +218,7 @@ C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\bin\Microsoft.Owin.Security.
 C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.csprojResolveAssemblyReference.cache
 C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.dll
 C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\obj\Debug\ENET_Care.pdb
+C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\bin\ENET_Care.BusinessLogic.dll
+C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\bin\ENET_Care.Data.dll
+C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\bin\ENET_Care.BusinessLogic.pdb
+C:\Users\Albert\Source\Repos\enet_care_a2\ENET_Care\bin\ENET_Care.Data.pdb

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ENET_Care.BusinessLogic;
 
 namespace ENET_Care.Controllers
 {
@@ -46,6 +48,8 @@ namespace ENET_Care.Controllers
 
         public ActionResult MyInformation()
         {
+            //var currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
+            //return View(currentUser);
             return View();
         }
 
