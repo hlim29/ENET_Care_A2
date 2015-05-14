@@ -93,6 +93,8 @@
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="PackageTest.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="DistCentreLogicTest.cs" />
+    <Compile Include="UserLogicTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
