@@ -16,7 +16,7 @@ namespace ENET_Care.Tests
         public void DistCentreLogicTest_GetAllDistCentre_CountEqualsThree()
         {
             int totalDistCentre = DistCentreLogic.GetAllDistCentre().Count;
-            Assert.Equals(3,totalDistCentre);
+            Assert.AreEqual(3,totalDistCentre);
         }
     }
 }

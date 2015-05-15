@@ -16,7 +16,7 @@ namespace ENET_Care.BusinessLogic
 
         public static Result ValidateInput(DateTime expiryDate)
         {
-            if (expiryDate < DateTime.Now)
+            if (expiryDate <= DateTime.Now)
                 return Result.PastDate;
             else if (expiryDate > DateTime.Now)
                 return Result.Ok;
