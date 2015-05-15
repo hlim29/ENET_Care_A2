@@ -48,9 +48,8 @@ namespace ENET_Care.Controllers
 
         public ActionResult MyInformation()
         {
-            //var currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
-            //return View(currentUser);
-            return View();
+            var currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
+            return View(currentUser);
         }
 
         public ActionResult Distribute()
