@@ -1,4 +1,4 @@
-﻿@model ENET_Care.Data.AspNetUser
+﻿@model dynamic
 @{
     ViewBag.Title = "MyInformation";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,48 +6,29 @@
 <h2>MyInformation</h2>
 
 <h4>First Name:</h4>
-<input type="text" name="FirstName" value="@Model.FirstName"/>
+<input type="text" name="FirstName" value="@Model.User.FirstName" />
 
 <br />
 
 <h4>Last Name:</h4>
-<input type="text" name="LastName" value="@Model.LastName" />
+<input type="text" name="LastName" value="@Model.User.LastName" />
 
 <br />
 
 <h4>Email:</h4>
-<input type="text" name="Email" value="@Model.Email" />
+<input type="text" name="Email" value="@Model.User.Email" />
 
 <br />
 
 <h4>Dist. Centre</h4>
 <select>
-    <option value="HeadOffice">Head Office</option>
-    <option value="Melbourne">Melbourne</option>
-    <option value="Sydney">Sydney</option>
-    <option value="Perth">Perth</option>
+    @foreach (var distCentre in Model.DistCentres)
+    {
+        string distCentreName = distCentre.CentreName;
+        <option value="@distCentreName">@distCentreName</option>
+    }
 </select>
-
-<br />
-
-<input type="button" value="Change Password" />
-
-<br />
-
-<h4>Old Password:</h4>
-<input type="password" name="OldPassword" />
-
-<br />
-
-<h4>New Password</h4>
-<input type="password" name="NewPassword" />
-
-<br />
-
-<h4>Confirm New Password</h4>
-<input type="password" name="ConfirmNewPassword" />
-
-<br />
-
+<br /><br />
+<!--Deleted Change Password Handled by Identity Framework-->
 <input type="reset" value="Cancel" runat="server" />
 <input type="button" value="Save" runat="server" />

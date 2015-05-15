@@ -45,8 +45,10 @@ namespace ENET_Care.Controllers
 
         public ActionResult MyInformation()
         {
-            var currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
-            return View(currentUser);
+            dynamic mymodel = new System.Dynamic.ExpandoObject();
+            mymodel.User = UserLogic.GetUserById(User.Identity.GetUserId());
+            mymodel.DistCentres = DistCentreLogic.GetAllDistCentre();
+            return View(mymodel);
         }
 
         public ActionResult Distribute()
