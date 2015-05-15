@@ -13,5 +13,10 @@ namespace ENET_Care.Controllers
         {
             return View();
         }
+
+        public ActionResult RemoveLoss()
+        {
+            return View();
+        }
     }
 }
