@@ -233,6 +233,7 @@
     <Content Include="Views\Pages\Distribute.cshtml" />
     <Content Include="Views\Package.cshtml" />
     <Content Include="Views\Package\Register.cshtml" />
+    <Content Include="Views\Package\RegSuccess.cshtml" />
     <None Include="Views\Pages\MyInformation.cshtml" />
     <Content Include="Views\Reports\DistributionCentreStockReport.cshtml" />
     <Content Include="Views\Reports\DistributionCentreLossesReport.cshtml" />

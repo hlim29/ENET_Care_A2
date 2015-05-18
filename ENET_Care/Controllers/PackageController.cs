@@ -27,13 +27,15 @@ namespace ENET_Care.Controllers
         public ActionResult Register()
         {
             SetupMedicationList();
-            return View(medications);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Register(int medicationId)
+        public ActionResult Register(int medications, string expiry)
         {
-            return null; 
+            int barcode = PackageLogic.RegisterPackage(DateTime.Parse(expiry),medications);
+            ViewBag.Barcode = barcode;
+            return View("RegSuccess"); 
         }
 
         private void SetupMedicationList()
