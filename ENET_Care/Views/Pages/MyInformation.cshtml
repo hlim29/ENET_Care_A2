@@ -20,12 +20,16 @@
 
 <br />
 
-<h4>Dist. Centre</h4>
+<h4>Dist. Centre</h4> 
 <select>
+    @{int currentCentreId = Model.User.CentreId, counter = 1;}
     @foreach (var distCentre in Model.DistCentres)
     {
+        string selectedValue = ""; //default select value
+        if (counter == currentCentreId) { selectedValue = "selected"; } //change to default selected for current user distribution centre
         string distCentreName = distCentre.CentreName;
-        <option value="@distCentreName">@distCentreName</option>
+        <option value="@distCentreName" @selectedValue>@distCentreName</option>
+        counter++;
     }
 </select>
 <br /><br />
