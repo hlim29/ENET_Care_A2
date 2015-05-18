@@ -16,5 +16,13 @@ namespace ENET_Care.Tests
             Debug.WriteLine(user.Email);
             Assert.AreNotEqual(null, user);
         }
+        [TestMethod]
+        public void UserTest_UpdateUserName_UserNameUpdated()
+        {
+            string id = "3240a097-a1ca-400a-b88b-0847a35e7aad";
+            UserLogic.UpdateUserName(id, "Agent", "EnetCare");
+            AspNetUser user = UserLogic.GetUserById(id);
+            Assert.AreEqual("Agent", user.FirstName);
+        }
     }
 }

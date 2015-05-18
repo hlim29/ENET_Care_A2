@@ -12,10 +12,7 @@ namespace ENET_Care.BusinessLogic
         /// <summary>
         /// Get specific user by id
         /// 
-        /// Currently provide error message:
-        /// +		$exception	{"The underlying provider failed on Open."}	System.Exception {System.Data.Entity.Core.EntityException}
-        /// 
-        /// Debug in UserTest -> UserTest_GetUserById_getFirstUser()
+        /// Changes 1 : Error regarding Connection String Fixed
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -25,6 +22,18 @@ namespace ENET_Care.BusinessLogic
             {
                 var query = from user in context.AspNetUsers where user.Id == id select user;
                 return query.First();
+            }
+        }
+
+        public static void UpdateUserName(string id, string newFirstName, string newLastName)
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers where user.Id == id select user;
+                AspNetUser currentUser = query.First();
+                currentUser.FirstName = newFirstName;
+                currentUser.LastName = newLastName;
+                context.SaveChanges();
             }
         }
 
