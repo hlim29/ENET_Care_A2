@@ -28,3 +28,13 @@ C:\Users\User\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\EntityFramework
 C:\Users\User\Source\Repos\enet_care_a2\ENET_Care.Data\obj\Debug\ENET_Care.Data.csprojResolveAssemblyReference.cache
 C:\Users\User\Source\Repos\enet_care_a2\ENET_Care.Data\obj\Debug\ENET_Care.Data.dll
 C:\Users\User\Source\Repos\enet_care_a2\ENET_Care.Data\obj\Debug\ENET_Care.Data.pdb
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\ENET_Care.Data.dll.config
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\ENET_Care.Data.dll
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\ENET_Care.Data.pdb
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\EntityFramework.dll
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\EntityFramework.xml
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\obj\Debug\ENET_Care.Data.csprojResolveAssemblyReference.cache
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\obj\Debug\ENET_Care.Data.dll
+C:\Users\11522012\Source\Repos\enet_care_a2\ENET_Care.Data\obj\Debug\ENET_Care.Data.pdb
