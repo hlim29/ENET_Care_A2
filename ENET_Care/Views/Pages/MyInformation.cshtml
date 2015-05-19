@@ -1,38 +1,30 @@
-﻿@model dynamic
+﻿@model ENET_Care.Data.AspNetUser
 @{
     ViewBag.Title = "MyInformation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>MyInformation</h2>
 
-<h4>First Name:</h4>
-<input type="text" name="FirstName" value="@Model.User.FirstName" />
+@using(Html.BeginForm())
+{ 
+    <h4>@Html.LabelFor(m => m.FirstName)</h4>
+    @Html.TextBoxFor(m => m.FirstName)
+    <br />
 
-<br />
+    <h4>@Html.LabelFor(m => m.LastName)</h4>
+    @Html.TextBoxFor(m => m.LastName)
 
-<h4>Last Name:</h4>
-<input type="text" name="LastName" value="@Model.User.LastName" />
+    <br />
 
-<br />
+    <h4>@Html.LabelFor(m => m.Email)</h4>
+    @Html.TextBoxFor(m => m.Email)
 
-<h4>Email:</h4>
-<input type="text" name="Email" value="@Model.User.Email" />
+    <br />
 
-<br />
-
-<h4>Dist. Centre</h4> 
-<select>
-    @{int currentCentreId = Model.User.CentreId, counter = 1;}
-    @foreach (var distCentre in Model.DistCentres)
-    {
-        string selectedValue = ""; //default select value
-        if (counter == currentCentreId) { selectedValue = "selected"; } //change to default selected for current user distribution centre
-        string distCentreName = distCentre.CentreName;
-        <option value="@distCentreName" @selectedValue>@distCentreName</option>
-        counter++;
-    }
-</select>
-<br /><br />
-<!--Deleted Change Password Handled by Identity Framework-->
-<input type="reset" value="Cancel" runat="server" />
-<input type="button" value="Save" runat="server" />
+    <h4>Dist. Centre</h4> 
+    @Html.DropDownListFor(m => m.CentreId, (IEnumerable<SelectListItem>)ViewBag.DistCentres)
+    <br /><br />
+    <!--Deleted Change Password Handled by Identity Framework-->
+    <input type="reset" value="Cancel" runat="server" />
+    <input type="button" value="Save" runat="server" />
+}
