@@ -9,13 +9,52 @@ namespace ENET_Care.BusinessLogic
 {
     public class UserLogic
     {
-
+        /// <summary>
+        /// Get specific user by id
+        /// 
+        /// Changes 1 : Error regarding Connection String Fixed
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static AspNetUser GetUserById(string id)
         {
-            using (var context = new  Entities())
+            using (var context = new Entities())
             {
                 var query = from user in context.AspNetUsers where user.Id == id select user;
                 return query.First();
+            }
+        }
+
+        public static void UpdateUserName(string id, string newFirstName, string newLastName)
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers where user.Id == id select user;
+                AspNetUser currentUser = query.First();
+                currentUser.FirstName = newFirstName;
+                currentUser.LastName = newLastName;
+                context.SaveChanges();
+            }
+        }
+
+        public static void UpdateEmail(string id, string email)
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers where user.Id == id select user;
+                AspNetUser currentUser = query.First();
+                currentUser.Email = email;
+                context.SaveChanges();
+            }
+        }
+        public static void UpdateCentreId(string id, int centreId)
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers where user.Id == id select user;
+                AspNetUser currentUser = query.First();
+                currentUser.CentreId = centreId;
+                context.SaveChanges();
             }
         }
 
