@@ -160,6 +160,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\PackageStatusController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,6 +230,8 @@
     <Content Include="Views\Pages\Discard.cshtml" />
     <Content Include="Views\Pages\RemoveLoss.cshtml" />
     <Content Include="Views\Pages\Distribute.cshtml" />
+    <Content Include="Views\Package\Register.cshtml" />
+    <Content Include="Views\Package\RegSuccess.cshtml" />
     <None Include="Views\Pages\MyInformation.cshtml" />
     <Content Include="Views\Reports\DistributionCentreStockReport.cshtml" />
     <Content Include="Views\Reports\DistributionCentreLossesReport.cshtml" />
@@ -245,6 +249,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ENET_Care.BusinessLogic\ENET_Care.BusinessLogic.csproj">
+      <Project>{84a8cc95-db1d-4ceb-af71-5e40dae2a089}</Project>
+      <Name>ENET_Care.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ENET_Care.Data\ENET_Care.Data.csproj">
+      <Project>{77cf588f-6d11-44c5-ba7e-ae50f669cbfc}</Project>
+      <Name>ENET_Care.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

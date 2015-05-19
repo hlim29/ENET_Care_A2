@@ -1,0 +1,38 @@
+﻿@model List<ENET_Care.Data.PackageStandardType>
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register</h2>
+
+<h2>Package</h2>
+@using (Html.BeginForm()) {
+<table>
+
+    <tr>
+        <td>
+            Medication
+        </td>
+        <td>
+            @Html.DropDownList("medications")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Expiry date
+        </td>
+        <td>
+            @Html.TextBox("expiry")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="TestForm" />
+        </td>
+        
+    </tr>
+    
+</table>
+}
+

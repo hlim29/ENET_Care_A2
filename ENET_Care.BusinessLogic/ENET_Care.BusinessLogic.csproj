@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MedicationLogic.cs" />
     <Compile Include="PackageLogic.cs" />
     <Compile Include="PackageStatusLogic.cs" />
     <Compile Include="Startup.cs" />
