@@ -10,6 +10,7 @@ namespace ENET_Care.BusinessLogic
 {
     public class PackageStatusLogic
     {
+        private static List<Package> packagesInStock = new List<Package>(); 
         /// <summary>
         /// An enum used for determining the status of a package. Synchronised with the DB, 'Status' table.
         /// DO NOT CHANGE THIS! I'm serious! >:(
@@ -134,6 +135,35 @@ namespace ENET_Care.BusinessLogic
                 return query.ToList();
             }
         }
+
+        public static List<PackageStatus> GetPackageStatusInStockByDistributionCentre(string staffId)
+        {
+            using (var context = new Entities())
+            {
+                 var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
+                int centreId = (int)staffCentreQuery.First().CentreId;
+                var query = from p in context.PackageStatus where p.Status == (int)StatusEnum.InStock && p.DestinationCentreID == centreId select p;
+                return query.ToList();
+            }
+        }
+
+        public static void UpdatePackageStatusLost()
+        {
+            List<PackageStatus> packages = GetPackageStatusInStockByDistributionCentre("id");
+            foreach (PackageStatus ps in packages){
+                if (!packagesInStock.Exists(x => x.PackageId == ps.PackageID))
+                {
+
+                }
+            }
+            
+        }
+
+        public static void AddPackageInStockList(int barcode)
+        {
+            packagesInStock.Add(PackageLogic.GetPackageByBarcode(barcode));
+        }
+
 
         /*
         public static bool HasStatus(int packageId)
