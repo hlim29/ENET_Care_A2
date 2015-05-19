@@ -30,7 +30,7 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult AddPackageInStockList(int PackageId)
         {
-            User.Identity.GetUserId(); //staff id
+            //User.Identity.GetUserId(); //staff id
             PackageStatusLogic.AddPackageInStockList(PackageId);
             return View();
         }
