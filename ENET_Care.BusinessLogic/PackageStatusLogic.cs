@@ -140,7 +140,7 @@ namespace ENET_Care.BusinessLogic
         {
             using (var context = new Entities())
             {
-                 var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
+                var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
                 int centreId = (int)staffCentreQuery.First().CentreId;
                 var query = from p in context.PackageStatus where p.Status == (int)StatusEnum.InStock && p.DestinationCentreID == centreId select p;
                 return query.ToList();
@@ -153,7 +153,12 @@ namespace ENET_Care.BusinessLogic
             foreach (PackageStatus ps in packages){
                 if (!packagesInStock.Exists(x => x.PackageId == ps.PackageID))
                 {
-
+                    using (var context = new Entities())
+                    {
+                        var packageStatusQuery = from p in context.PackageStatus where p.PackageStatusID == ps.PackageStatusID select p;
+                        ps.Status = (int)StatusEnum.Lost;
+                        context.SaveChanges();
+                    }
                 }
             }
             
