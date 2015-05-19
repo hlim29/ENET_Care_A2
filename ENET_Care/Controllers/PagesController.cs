@@ -50,15 +50,18 @@ namespace ENET_Care.Controllers
             SetUpDistCentreDropDown();
             return View(currentUser);
         }
-        //[HttpPost]
-        //public ActionResult MyInformation(string firstName, string lastName, string email, string distCentre)
-        //{
-        //    Debug.WriteLine(firstName);
-        //    dynamic mymodel = new System.Dynamic.ExpandoObject();
-        //    mymodel.User = UserLogic.GetUserById(User.Identity.GetUserId());
-        //    mymodel.DistCentres = DistCentreLogic.GetAllDistCentre();
-        //    return View(mymodel);
-        //}
+        [HttpPost]
+        public ActionResult MyInformation(string firstName, string lastName, string email, string centreId)
+        {
+            Debug.WriteLine(firstName);
+            string userId = User.Identity.GetUserId();
+            UserLogic.UpdateUserName(userId, firstName, lastName);
+            UserLogic.UpdateEmail(userId, email);
+
+            SetUpDistCentreDropDown();
+            AspNetUser currentUser = UserLogic.GetUserById(userId);
+            return View(currentUser);
+        }
         private void SetUpDistCentreDropDown()
         {
             using (var context = new Entities())
