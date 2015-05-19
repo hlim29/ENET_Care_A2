@@ -23,7 +23,7 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult UpdatePackageStatusLost()
         {
-            PackageStatusLogic.UpdatePackageStatusLost();
+           // PackageStatusLogic.UpdatePackageStatusLost();
             return View();
         }
 
