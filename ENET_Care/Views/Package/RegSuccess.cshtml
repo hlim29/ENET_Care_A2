@@ -1,9 +1,17 @@
-﻿
+﻿@using Zen.Barcode.Web.Mvc;
+@using Zen.Barcode;
+@using Zen.Barcode.Web;
+
 @{
-    ViewBag.Title = "RegSuccess";
+    ViewBag.Title = "Package registered";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Successful registration</h2>
+<h2>Successful package registration</h2>
 
-@ViewBag.Barcode
+
+@{string barcode = ViewBag.Barcode;}
+<div style="text-align:center;">
+    <p>The barcode is @barcode</p>
+    <img src="@Url.Barcode(barcode, BarcodeSymbology.Code128, 30, 1, true)">
+</div>

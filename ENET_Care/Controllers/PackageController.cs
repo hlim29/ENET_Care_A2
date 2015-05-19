@@ -34,7 +34,8 @@ namespace ENET_Care.Controllers
         public ActionResult Register(int medications, string expiry)
         {
             int barcode = PackageLogic.RegisterPackage(DateTime.Parse(expiry),medications);
-            ViewBag.Barcode = barcode;
+            ViewBag.Barcode = barcode.ToString();
+            
             return View("RegSuccess"); 
         }
 

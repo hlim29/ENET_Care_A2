@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Zen.Barcode.Web;
 
 namespace ENET_Care
 {
@@ -11,6 +12,7 @@ namespace ENET_Care
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.Add("BarcodeImaging", new Route("Barcode/{id}", new BarcodeImageRouteHandler()));
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -18,6 +20,8 @@ namespace ENET_Care
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }
