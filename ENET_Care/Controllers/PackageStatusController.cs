@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ENET_Care.BusinessLogic;
+using Microsoft.AspNet.Identity;
 
 namespace ENET_Care.Controllers
 {
@@ -23,14 +24,13 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult UpdatePackageStatusLost()
         {
-           // PackageStatusLogic.UpdatePackageStatusLost();
+            PackageStatusLogic.UpdatePackageStatusLost(User.Identity.GetUserId());
             return View();
         }
 
         [HttpPost]
         public ActionResult AddPackageInStockList(int PackageId)
         {
-            //User.Identity.GetUserId(); //staff id
             PackageStatusLogic.AddPackageInStockList(PackageId);
             return View();
         }
