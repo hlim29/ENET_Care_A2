@@ -10,6 +10,7 @@ namespace ENET_Care.BusinessLogic
 {
     public class PackageStatusLogic
     {
+        private static List<Package> packagesInStock = new List<Package>();
         /// <summary>
         /// An enum used for determining the status of a package. Synchronised with the DB, 'Status' table.
         /// DO NOT CHANGE THIS! I'm serious! >:(
@@ -25,8 +26,6 @@ namespace ENET_Care.BusinessLogic
         };
         public static void RegisterArrival(int packageId, int centreId, string staffId)
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
-        
             PackageStatus p = new PackageStatus();
             p.PackageID = packageId;
             p.DestinationCentreID = centreId;
@@ -39,21 +38,21 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
-        public static void ReceivePackage(int packageId, string staffId)
+        public static PackageStatus ReceivePackage(int packageId, string staffId)
         {
-            AlterPackage(packageId, staffId, StatusEnum.Received);
+            return AlterPackage(packageId, staffId, StatusEnum.Received);
         }
 
         public static PackageStatus DiscardPackage(int packageId, string staffId)
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetFullPath(@"..\..\..\ENET_Care\App_Data"));
-        
+
+
             return AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 
-        public static void DistributePackage(int packageId, string staffId)
+        public static PackageStatus DistributePackage(int packageId, string staffId)
         {
-            AlterPackage(packageId, staffId, StatusEnum.Distributed);
+            return AlterPackage(packageId, staffId, StatusEnum.Distributed);
         }
 
         /// <summary>
@@ -67,7 +66,6 @@ namespace ENET_Care.BusinessLogic
         {
             using (var context = new Entities())
             {
-                 //Non-existent packages may be entered by the user, hence the try catch block
                 try
                 {
                     var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
@@ -81,26 +79,23 @@ namespace ENET_Care.BusinessLogic
 
                     return currentPackageStatus;
                 }
-                //Prevents exceptions from non-existent packages
                 catch (NullReferenceException)
                 {
                     return null;
                 }
-                
             }
-            
         }
 
         public static void SendPackage(int source, int destination, string staffId, int packageId)
         {
             using (var context = new Entities())
             {
-                //var query = from p in context.PackageStatus where p.PackageID == packageId select p;
-                //PackageStatus 
+                var query = from p in context.PackageStatus where p.PackageID == packageId select p;
+
                 var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
                 int centreId = (int)staffCentreQuery.First().CentreId;
 
-                PackageStatus currentPackageStatus = GetPackageStatusById(packageId);
+                PackageStatus currentPackageStatus = query.First();
                 currentPackageStatus.StaffID = staffId;
                 currentPackageStatus.SourceCentreID = centreId;
                 currentPackageStatus.DestinationCentreID = destination;
@@ -141,6 +136,41 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static List<PackageStatus> GetPackageStatusInStockByDistributionCentre(string staffId)
+        {
+            using (var context = new Entities())
+            {
+                var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
+                int centreId = (int)staffCentreQuery.First().CentreId;
+                var query = from p in context.PackageStatus where p.Status == (int)StatusEnum.InStock && p.DestinationCentreID == centreId select p;
+                return query.ToList();
+            }
+        }
+
+        public static void UpdatePackageStatusLost()
+        {
+            List<PackageStatus> packages = GetPackageStatusInStockByDistributionCentre("id");
+            foreach (PackageStatus ps in packages)
+            {
+                if (!packagesInStock.Exists(x => x.PackageId == ps.PackageID))
+                {
+                    using (var context = new Entities())
+                    {
+                        var packageStatusQuery = from p in context.PackageStatus where p.PackageStatusID == ps.PackageStatusID select p;
+                        ps.Status = (int)StatusEnum.Lost;
+                        context.SaveChanges();
+                    }
+                }
+            }
+
+        }
+
+        public static void AddPackageInStockList(int barcode)
+        {
+            packagesInStock.Add(PackageLogic.GetPackageByBarcode(barcode));
+        }
+
+
         /*
         public static bool HasStatus(int packageId)
         {
@@ -172,3 +202,4 @@ namespace ENET_Care.BusinessLogic
          * */
     }
 }
+
