@@ -48,28 +48,28 @@ namespace ENET_Care.Controllers
         {
             AspNetUser currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
             SetUpDistCentreDropDown();
+            ViewBag.Updated = false;
             return View(currentUser);
         }
         /// <summary>
         /// Retrieve user input
         /// Update database using BusinessLogic method
         /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="email"></param>
-        /// <param name="centreId"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult MyInformation(string firstName, string lastName, string email, string centreId)
         {
+            //Updating to the database
             Debug.WriteLine(firstName);
             string userId = User.Identity.GetUserId();
             UserLogic.UpdateUserName(userId, firstName, lastName);
             UserLogic.UpdateEmail(userId, email);
             UserLogic.UpdateCentreId(userId,Int32.Parse(centreId));
 
+            //setting up for the view
             SetUpDistCentreDropDown();
             AspNetUser currentUser = UserLogic.GetUserById(userId);
+            ViewBag.Updated = true;
             return View(currentUser);
         }
         /// <summary>
