@@ -1,14 +1,18 @@
-﻿
+﻿@model ENET_Care.Data.Package
 @{
     ViewBag.Title = "RemoveLoss";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Remove Loss</h2>
 
-<select>
-    <option value="Ibuprofen">Ibuprofen</option>
-    <option value="Paracetamol">Paracetamol</option>
-</select>
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.PackageId)
+    <br />
 
-<input type="button" value="Remove Loss" />
+    <input type="button" value="Scan" name="scan" onclick="location.href'@Url.Action("Pages", "AddPackageInStockList")'" />
+
+    <br />
+
+    <input type="button" value="Remove Losses" name="removeLoss" onclick="location.href'@Url.Action("Pages", "UpdatePackageStatusLost")'" />
+}

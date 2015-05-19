@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ENET_Care.BusinessLogic;
 
 namespace ENET_Care.Controllers
 {
@@ -16,6 +17,21 @@ namespace ENET_Care.Controllers
 
         public ActionResult RemoveLoss()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePackageStatusLost()
+        {
+            PackageStatusLogic.UpdatePackageStatusLost();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPackageInStockList(int PackageId)
+        {
+            User.Identity.GetUserId(); //staff id
+            PackageStatusLogic.AddPackageInStockList(PackageId);
             return View();
         }
     }
