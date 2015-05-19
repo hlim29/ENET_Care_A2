@@ -147,9 +147,9 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
-        public static void UpdatePackageStatusLost()
+        public static void UpdatePackageStatusLost(string staffid)
         {
-            List<PackageStatus> packages = GetPackageStatusInStockByDistributionCentre("id");
+            List<PackageStatus> packages = GetPackageStatusInStockByDistributionCentre(staffid);
             foreach (PackageStatus ps in packages)
             {
                 if (!packagesInStock.Exists(x => x.PackageId == ps.PackageID))
@@ -162,7 +162,7 @@ namespace ENET_Care.BusinessLogic
                     }
                 }
             }
-
+            packagesInStock = new List<Package>();
         }
 
         public static void AddPackageInStockList(int barcode)
