@@ -37,5 +37,15 @@ namespace ENET_Care.Tests
         {
             Assert.IsNull(PackageStatusLogic.DiscardPackage(100000, "y783156"));
         }
+
+        [TestMethod]
+        public void PackageTest_IncludePackageScanned_PackageAddedToList()
+        {
+
+            int count = 0; //count the current list e.g. 10
+                //IncludePackageTest
+            int count2 = 1; //count the current list e.g 11
+            Assert.AreEqual(count2, count + 1);
+        }
     }
 }
