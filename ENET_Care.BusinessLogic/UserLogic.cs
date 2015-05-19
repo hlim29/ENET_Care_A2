@@ -37,6 +37,27 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static void UpdateEmail(string id, string email)
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers where user.Id == id select user;
+                AspNetUser currentUser = query.First();
+                currentUser.Email = email;
+                context.SaveChanges();
+            }
+        }
+        public static void UpdateCentreId(string id, int centreId)
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers where user.Id == id select user;
+                AspNetUser currentUser = query.First();
+                currentUser.CentreId = centreId;
+                context.SaveChanges();
+            }
+        }
+
         public static DistCentre GetDistCentreByUserId(string id)
         {
             return GetUserById(id).DistCentre;
