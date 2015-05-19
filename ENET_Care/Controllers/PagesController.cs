@@ -50,6 +50,15 @@ namespace ENET_Care.Controllers
             SetUpDistCentreDropDown();
             return View(currentUser);
         }
+        /// <summary>
+        /// Retrieve user input
+        /// Update database using BusinessLogic method
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="centreId"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult MyInformation(string firstName, string lastName, string email, string centreId)
         {
@@ -57,11 +66,15 @@ namespace ENET_Care.Controllers
             string userId = User.Identity.GetUserId();
             UserLogic.UpdateUserName(userId, firstName, lastName);
             UserLogic.UpdateEmail(userId, email);
+            UserLogic.UpdateCentreId(userId,Int32.Parse(centreId));
 
             SetUpDistCentreDropDown();
             AspNetUser currentUser = UserLogic.GetUserById(userId);
             return View(currentUser);
         }
+        /// <summary>
+        /// Retrieve all DistCentres from database and put it in SelectListItem(Datatype for Razor DropDownList)
+        /// </summary>
         private void SetUpDistCentreDropDown()
         {
             using (var context = new Entities())
