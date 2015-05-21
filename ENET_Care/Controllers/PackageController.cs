@@ -33,9 +33,16 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult Register(int medications, string expiry)
         {
-            int barcode = PackageLogic.RegisterPackage(DateTime.Parse(expiry),medications);
-            ViewBag.Barcode = barcode.ToString();
-            
+            try
+            {
+                int barcode = PackageLogic.RegisterPackage(DateTime.Parse(expiry), medications);
+                ViewBag.Barcode = barcode.ToString();
+            }
+            catch (FormatException)
+            {
+                ViewBag.Error = "Please enter a valid date";
+                return Register();
+            }
             return View("RegSuccess"); 
         }
 

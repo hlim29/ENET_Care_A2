@@ -3,36 +3,50 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/jquery-ui.js")
+@Scripts.Render("~/Scripts/jquery-ui.min.js")
+@Styles.Render("~/Content/jquery-ui.css")
+@Styles.Render("~/Content/jquery-ui.structure.css")
+@Styles.Render("~/Content/jquery-ui.theme.css")
+
+
+
 
 <h2>Register</h2>
 
 <h2>Package</h2>
-@using (Html.BeginForm()) {
-<table>
+<p class="bg-danger">@ViewBag.Error</p>
+@using (Html.BeginForm())
+{
+    <table>
 
-    <tr>
-        <td>
-            Medication
-        </td>
-        <td>
-            @Html.DropDownList("medications")
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Expiry date
-        </td>
-        <td>
-            @Html.TextBox("expiry")
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="submit" value="TestForm" />
-        </td>
-        
-    </tr>
-    
-</table>
+        <tr>
+            <td>
+                Medication
+            </td>
+            <td>
+                @Html.DropDownList("medications")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Expiry date
+            </td>
+            <td>
+                @Html.TextBox("expiry", null, new { id = "datepicker", @class = "datepicker" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Register package" />
+            </td>
+
+        </tr>
+
+    </table>
 }
+<script type="text/javascript">
+    $("#datepicker").datepicker({ minDate: 0, dateFormat: "dd/mm/yy" });
 
+</script>
