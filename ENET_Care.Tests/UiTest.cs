@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ENET_Care.Controllers;
 using System.Web;
-using Moq;
 using System.Security.Principal;
 using System.Security.Claims;
 using System.Web.Mvc;
@@ -21,6 +20,11 @@ namespace ENET_Care.Tests
 
         }
 
+        /// <summary>
+        /// Attempts to register a package that is expired.
+        /// The action should not crash and should send the user back
+        /// to the package registration page with the error message
+        /// </summary>
         [TestMethod]
         public void Ui_RegisterPackage_PastExpiryDate()
         {
@@ -30,6 +34,10 @@ namespace ENET_Care.Tests
             Assert.ReferenceEquals(controller.Register(), ar); //The user is sent back to the registration page
         }
 
+        /// <summary>
+        /// A helper function designed to mock a logged in user
+        /// </summary>
+        /// <returns>A controller with the user mock</returns>
         private PackageController SetupUser(){
             var controller = new PackageController()
             {

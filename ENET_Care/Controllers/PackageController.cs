@@ -46,12 +46,12 @@ namespace ENET_Care.Controllers
                 PackageStatusLogic.RegisterArrival(barcode, currentUserCentreId, currentUserId);
                 ViewBag.Barcode = barcode.ToString();
             }
-            catch (ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException) //If the expiry date is in the past
             {
                 ViewBag.Error = "The package is expired";
                 return Register();
             }
-            catch (FormatException)
+            catch (FormatException) //If the date field is invalid
             {
                 ViewBag.Error = "Please enter a valid date";
                 return Register();
@@ -79,6 +79,11 @@ namespace ENET_Care.Controllers
                 PackageStatusLogic.SendPackage(currentUserCentreId,centres,currentUserId,barcodeValue);
             }
             catch (FormatException) //If the barcode isn't a number
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return Send();
+            } 
+            catch (OverflowException) //The barcode is an int32, cannot exceed 2^31 - 1
             {
                 ViewBag.Error = "Please enter a valid barcode";
                 return Send();
