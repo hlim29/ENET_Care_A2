@@ -1,0 +1,37 @@
+﻿@model List<ENET_Care.Data.DistCentre>
+@{
+    ViewBag.Title = "Send";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Send</h2>
+<p class="bg-danger">@ViewBag.Error</p>
+@using (Html.BeginForm())
+{
+    <table>
+
+        <tr>
+            <td>
+                Destination
+            </td>
+            <td>
+                @Html.DropDownList("Centres")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Barcode
+            </td>
+            <td>
+                @Html.TextBox("barcode")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Register package" />
+            </td>
+
+        </tr>
+
+    </table>
+}

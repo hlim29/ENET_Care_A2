@@ -26,5 +26,6 @@ namespace ENET_Care.BusinessLogic
                 return distCentre.ToList();
             }
         }
+
     }
 }

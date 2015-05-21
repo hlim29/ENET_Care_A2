@@ -20,7 +20,7 @@ namespace ENET_Care.BusinessLogic
         {
             using (var context = new Entities())
             {
-                var query = from user in context.AspNetUsers where user.Id == id select user;
+                var query = from user in context.AspNetUsers.Include("DistCentre") where user.Id == id select user;
                 return query.First();
             }
         }

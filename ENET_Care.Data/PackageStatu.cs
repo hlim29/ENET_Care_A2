@@ -22,8 +22,8 @@ namespace ENET_Care.Data
         public string StaffID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual DistCentre DistCentre { get; set; }
-        public virtual DistCentre DistCentre1 { get; set; }
+        public virtual DistCentre DestCentre { get; set; }
+        public virtual DistCentre SourceCentre { get; set; }
         public virtual Package Package { get; set; }
         public virtual Status Status1 { get; set; }
     }

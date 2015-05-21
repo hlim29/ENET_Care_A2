@@ -88,6 +88,7 @@ namespace ENET_Care.BusinessLogic
 
         public static void SendPackage(int source, int destination, string staffId, int packageId)
         {
+
             using (var context = new Entities())
             {
                 var query = from p in context.PackageStatus where p.PackageID == packageId select p;
@@ -100,6 +101,8 @@ namespace ENET_Care.BusinessLogic
                 currentPackageStatus.SourceCentreID = centreId;
                 currentPackageStatus.DestinationCentreID = destination;
                 currentPackageStatus.Status = (int)StatusEnum.InTransit;
+
+                context.SaveChanges();
             }
         }
 
@@ -168,6 +171,17 @@ namespace ENET_Care.BusinessLogic
         public static void AddPackageInStockList(int barcode)
         {
             packagesInStock.Add(PackageLogic.GetPackageByBarcode(barcode));
+        }
+
+        public static PackageStatus GetPackageStatusEager(PackageStatus status)
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.PackageStatus.Include("SourceCentre").Include("AspNetUser").Include("DestCentre").Include("Status1").Include("Package")
+                            where p.PackageStatusID == status.PackageStatusID
+                            select p;
+                return query.First();
+            }
         }
 
 

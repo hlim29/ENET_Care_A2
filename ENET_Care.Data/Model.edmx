@@ -367,8 +367,8 @@
           <Property Name="Status" Type="Int32" />
           <Property Name="StaffID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_PackageStatus_ToTable" FromRole="PackageStatus" ToRole="AspNetUsers" />
-          <NavigationProperty Name="DistCentre" Relationship="Self.FK_PackageStatus_ToTable_DistCentre_Destination" FromRole="PackageStatus" ToRole="DistCentre" />
-          <NavigationProperty Name="DistCentre1" Relationship="Self.FK_PackageStatus_ToTable_DistCentre_Source" FromRole="PackageStatus" ToRole="DistCentre" />
+          <NavigationProperty Name="DestCentre" Relationship="Self.FK_PackageStatus_ToTable_DistCentre_Destination" FromRole="PackageStatus" ToRole="DistCentre" />
+          <NavigationProperty Name="SourceCentre" Relationship="Self.FK_PackageStatus_ToTable_DistCentre_Source" FromRole="PackageStatus" ToRole="DistCentre" />
           <NavigationProperty Name="Package" Relationship="Self.FK_PackageStatus_ToTable_Packages" FromRole="PackageStatus" ToRole="Package" />
           <NavigationProperty Name="Status1" Relationship="Self.FK_PackageStatus_ToTable_Status" FromRole="PackageStatus" ToRole="Status" />
         </EntityType>

@@ -1,0 +1,52 @@
+﻿@model ENET_Care.Data.PackageStatus
+@{
+    ViewBag.Title = "SendSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Send Success</h2>
+<h3>The package has been successfully sent</h3>
+
+<table class="table-striped table-bordered">
+    <tr>
+        <td>
+            Package ID
+        </td>
+        <td>
+            @Model.PackageID
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Source
+        </td>
+        <td>
+            @Model.SourceCentre.CentreName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Destination
+        </td>
+        <td>
+            @Model.DestCentre.CentreName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Current status
+        </td>
+        <td>
+            @Model.Status1.StatusName
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Sent by
+        </td>
+        <td>
+            @Model.AspNetUser.Email
+        </td>
+    </tr>
+</table>
+

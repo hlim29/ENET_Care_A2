@@ -250,6 +250,8 @@
     <Content Include="Views\Package\Register.cshtml" />
     <Content Include="Views\Package\RegSuccess.cshtml" />
     <Content Include="Views\PackageStatus\RemoveLoss.cshtml" />
+    <Content Include="Views\Package\Send.cshtml" />
+    <Content Include="Views\Package\SendSuccess.cshtml" />
     <None Include="Views\Pages\MyInformation.cshtml" />
     <Content Include="Views\Reports\DistributionCentreStockReport.cshtml" />
     <Content Include="Views\Reports\DistributionCentreLossesReport.cshtml" />

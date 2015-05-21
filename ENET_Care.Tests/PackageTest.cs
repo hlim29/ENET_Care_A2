@@ -35,7 +35,13 @@ namespace ENET_Care.Tests
         [TestMethod]
         public void PackageTest_RegisterInvalidStatus()
         {
-            PackageStatusLogic.RegisterArrival(892417, 12489, "no one");
+            PackageStatusLogic.RegisterArrival(892417, 12489, "3240a097-a1ca-400a-b88b-0847a35e7aad");
+        }
+
+        [TestMethod]
+        public void PackageTest_TryGetInvalidPackageStatus()
+        {
+            PackageStatusLogic.GetPackageStatusById(76589437);
         }
     }
 }
