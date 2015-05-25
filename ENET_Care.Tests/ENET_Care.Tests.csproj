@@ -99,6 +99,7 @@
     <Compile Include="PackageTest.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UiTest.cs" />
+    <Compile Include="PackageSatusTest.cs" />
     <Compile Include="UserLogicTest.cs" />
   </ItemGroup>
   <ItemGroup>

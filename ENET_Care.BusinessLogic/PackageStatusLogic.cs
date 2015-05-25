@@ -45,8 +45,6 @@ namespace ENET_Care.BusinessLogic
 
         public static PackageStatus DiscardPackage(int packageId, string staffId)
         {
-
-
             return AlterPackage(packageId, staffId, StatusEnum.Discarded);
         }
 
