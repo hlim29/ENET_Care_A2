@@ -11,11 +11,11 @@
     @Html.TextBox("barcode")
     <br />
 
-    <input type="submit" value="Scan" name="scan"/>
+    <input type="submit" value="Scan" name="scan"  />
 
     <br />
 
-    <input type="button" value="Remove Losses" name="removeLoss" onclick="location.href='@Url.Action("PackageStatus","UpdatePackageStatusLost")'" />
+    <input type="button" value="Remove Losses" name="removeLoss" onclick="location.href='@Url.Action("UpdatePackageStatusLost","PackageStatus")'" />
 
 
 }

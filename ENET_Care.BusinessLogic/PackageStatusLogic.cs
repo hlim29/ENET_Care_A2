@@ -161,7 +161,7 @@ namespace ENET_Care.BusinessLogic
                     using (var context = new Entities())
                     {
                         var packageStatusQuery = from p in context.PackageStatus where p.PackageStatusID == ps.PackageStatusID select p;
-                        ps.Status = (int)StatusEnum.Lost;
+                        packageStatusQuery.SingleOrDefault().Status = (int)StatusEnum.Lost;
                         context.SaveChanges();
                     }
 

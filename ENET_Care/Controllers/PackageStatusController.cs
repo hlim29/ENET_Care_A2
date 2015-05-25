@@ -25,6 +25,13 @@ namespace ENET_Care.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult UpdatePackageStatusLost()
+        {
+            List<Package> packageLost = PackageStatusLogic.UpdatePackageStatusLost(User.Identity.GetUserId());
+            return View();
+        }
+
         [HttpPost]
         public ActionResult RemoveLoss(string barcode)
         {
