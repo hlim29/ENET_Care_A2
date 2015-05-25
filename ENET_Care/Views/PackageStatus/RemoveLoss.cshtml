@@ -1,21 +1,31 @@
-﻿@model ENET_Care.Data.Package
+﻿@using ENET_Care.Data
+@model List<Package>
 @{
     ViewBag.Title = "RemoveLoss";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Remove Loss</h2>
-
+<p class="alert-danger">@ViewBag.Error</p>
 @using (Html.BeginForm())
 {
-    @Html.TextBoxFor(m => m.PackageId)
+    @Html.TextBox("barcode")
     <br />
 
-    <input type="button" value="Scan" name="scan" onclick="location.href'@Url.Action("Pages", "AddPackageInStockList")'" />
+    <input type="submit" value="Scan" name="scan"/>
 
     <br />
 
-    <input type="button" value="Remove Losses" name="removeLoss" onclick="location.href'@Url.Action("Pages", "UpdatePackageStatusLost")'" />
-    
+    <input type="button" value="Remove Losses" name="removeLoss" onclick="location.href='@Url.Action("PackageStatus","UpdatePackageStatusLost")'" />
 
 
 }
+
+<div>
+    
+    @if (Model != null) { 
+        foreach (var package in Model)
+        {
+            <li>@package.PackageId</li>
+        }
+    }
+</div>
