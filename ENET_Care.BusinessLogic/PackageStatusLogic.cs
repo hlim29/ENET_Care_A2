@@ -68,7 +68,8 @@ namespace ENET_Care.BusinessLogic
                     var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
                     int centreId = (int)staffCentreQuery.FirstOrDefault().CentreId;
 
-                    PackageStatus currentPackageStatus = GetPackageStatusById(packageId);
+                    var packageStatusQuery = from p in context.PackageStatus where p.PackageID == packageId select p;
+                    PackageStatus currentPackageStatus = packageStatusQuery.First();
                     currentPackageStatus.StaffID = staffId;
                     currentPackageStatus.DestinationCentreID = centreId;
                     currentPackageStatus.Status = (int)status;
