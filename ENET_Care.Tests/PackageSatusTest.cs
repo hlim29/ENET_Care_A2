@@ -9,6 +9,12 @@ namespace ENET_Care.Tests
     public class PackageSatusTest
     {
         [TestMethod]
+        public void PackageStatusTest_GetPackageStatusById_DataSuccessfullyRetrieved()
+        {
+            PackageStatus packageStatus = PackageStatusLogic.GetPackageStatusById(21);
+            Assert.AreEqual(packageStatus.DestinationCentreID, 2);
+        }
+        [TestMethod]
         public void PackageStatusTest_ReceivePackage_DataUpdated()
         {
             int packageId = 20;
@@ -19,10 +25,14 @@ namespace ENET_Care.Tests
             Assert.AreEqual(centreId, staffCentreId);
         }
         [TestMethod]
-        public void PackageStatusTest_GetPackageStatusById_DataSuccessfullyRetrieved()
+        public void PackageStatusTest_DiscardPackage_DataUpdated()
         {
-            PackageStatus packageStatus = PackageStatusLogic.GetPackageStatusById(21);
-            Assert.AreEqual(packageStatus.DestinationCentreID, 2);
+            int packageId = 20;
+            PackageStatusLogic.DiscardPackage(packageId, "35cd70ce-35f4-4cb9-8de2-262208cdfe55");
+            int currentStatus = (int)PackageStatusLogic.GetPackageStatusById(packageId).Status;
+            //int staffCentreId = (int)UserLogic.GetUserById("35cd70ce-35f4-4cb9-8de2-262208cdfe55").CentreId;
+
+            Assert.AreEqual(currentStatus, (int)PackageStatusLogic.StatusEnum.Discarded);
         }
     }
 }

@@ -48,7 +48,13 @@ namespace ENET_Care.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Discard(string packageId)
+        {
+            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            PackageStatusLogic.DiscardPackage(Int32.Parse(packageId), staffId);
+            return View();
+        }
         public ActionResult MyInformation()
         {
             AspNetUser currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
