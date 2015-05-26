@@ -1,31 +1,52 @@
-﻿@using ENET_Care.Data
-@model List<Package>
+﻿@model List<ENET_Care.Data.PackageStandardType>
 @{
     ViewBag.Title = "RemoveLoss";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Remove Loss</h2>
 <p class="alert-danger">@ViewBag.Error</p>
-@using (Html.BeginForm("RemoveLoss","PackageStatus"))
-{
-    @Html.TextBox("barcode")
-    <br />
-
-    <input type="submit" value="Scan" name="scan"  />
-
-    <br />
-}
-@using (Html.BeginForm("UpdatePackageStatusLost", "PackageStatus"))
-{
-    <input type="submit" value="Remove" name="removeLoss" />
-}
+@using ENET_Care.BusinessLogic
+@using (Html.BeginForm())
+    {
+    <table>
+        <tr>
+            <td>
+                Select the medication type
+            </td>
+        <tr>
+            <td>
+                @Html.DropDownList("medications")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Barcode
+            </td>
+        </tr>
+        <tr>
+            <td>
+               @Html.TextBox("barcode")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Scan" name="action" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Remove" name="action" />
+            </td>
+        </tr>
+    </table>
+    }
 
 <div>
     
-    @if (Model != null) { 
-        foreach (var package in Model)
+
+        @foreach (var package in PackageStatusLogic.getPackagesInStockList())
         {
             <li>@package.PackageId</li>
         }
-    }
+    
 </div>

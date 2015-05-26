@@ -10,7 +10,7 @@ namespace ENET_Care.BusinessLogic
 {
     public class PackageStatusLogic
     {
-        public static List<Package> packagesInStock = new List<Package>();
+        private static List<Package> packagesInStock = new List<Package>();
         /// <summary>
         /// An enum used for determining the status of a package. Synchronised with the DB, 'Status' table.
         /// DO NOT CHANGE THIS! I'm serious! >:(
@@ -138,20 +138,29 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
-        public static List<PackageStatus> GetPackageStatusInStockByDistributionCentre(string staffId)
+        public static List<PackageStatus> GetPackageStatusInStockByDistributionCentreAndType(string staffId, int medicationId)
         {
             using (var context = new Entities())
             {
                 var staffCentreQuery = from s in context.AspNetUsers where s.Id == staffId select s;
                 int centreId = (int)staffCentreQuery.First().CentreId;
-                var query = from p in context.PackageStatus where p.Status == (int)StatusEnum.InStock && p.DestinationCentreID == centreId select p;
+                var query = from ps in context.PackageStatus 
+                            join p in context.Packages 
+                            on ps.PackageID equals p.PackageId
+                            where ps.Status == (int)StatusEnum.InStock && ps.DestinationCentreID == centreId && p.PackageStandardTypeId == medicationId
+                            select ps;
                 return query.ToList();
             }
         }
 
-        public static List<Package> UpdatePackageStatusLost(string staffid)
+        public static List<Package> getPackagesInStockList()
         {
-            List<PackageStatus> packages = GetPackageStatusInStockByDistributionCentre(staffid);
+            return packagesInStock;
+        }
+
+        public static List<Package> UpdatePackageStatusLost(string staffid, int medicationId)
+        {
+            List<PackageStatus> packages = GetPackageStatusInStockByDistributionCentreAndType(staffid, medicationId);
             List<Package> lostPackages = new List<Package>();
             foreach (PackageStatus ps in packages)
             {
