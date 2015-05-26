@@ -30,9 +30,17 @@ namespace ENET_Care.Tests
             int packageId = 20;
             PackageStatusLogic.DiscardPackage(packageId, "35cd70ce-35f4-4cb9-8de2-262208cdfe55");
             int currentStatus = (int)PackageStatusLogic.GetPackageStatusById(packageId).Status;
-            //int staffCentreId = (int)UserLogic.GetUserById("35cd70ce-35f4-4cb9-8de2-262208cdfe55").CentreId;
 
             Assert.AreEqual(currentStatus, (int)PackageStatusLogic.StatusEnum.Discarded);
+        }
+        [TestMethod]
+        public void PackageStatusTest_DistributePackage_DataUpdated()
+        {
+            int packageId = 20;
+            PackageStatusLogic.DistributePackage(packageId, "35cd70ce-35f4-4cb9-8de2-262208cdfe55");
+            int currentStatus = (int)PackageStatusLogic.GetPackageStatusById(packageId).Status;
+
+            Assert.AreEqual(currentStatus, (int)PackageStatusLogic.StatusEnum.Distributed);
         }
     }
 }

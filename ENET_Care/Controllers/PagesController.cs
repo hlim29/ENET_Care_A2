@@ -103,5 +103,12 @@ namespace ENET_Care.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Distribute(string packageId)
+        {
+            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            PackageStatusLogic.DistributePackage(Int32.Parse(packageId), staffId);
+            return View();
+        }
     }
 }
