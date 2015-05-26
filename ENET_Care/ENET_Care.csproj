@@ -255,13 +255,13 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Receive.cshtml" />
-    <Content Include="Views\Pages\Receive.cshtml" />
+    <Content Include="Views\PackageStatus\Receive.cshtml" />
     <Content Include="Views\Pages\Send.cshtml" />
     <Content Include="Views\Pages\Register.cshtml" />
     <Content Include="Views\Pages\Stocktaking.cshtml" />
-    <Content Include="Views\Pages\Discard.cshtml" />
+    <Content Include="Views\PackageStatus\Discard.cshtml" />
     <Content Include="Views\Pages\RemoveLoss.cshtml" />
-    <Content Include="Views\Pages\Distribute.cshtml" />
+    <Content Include="Views\PackageStatus\Distribute.cshtml" />
     <Content Include="Views\Package\Register.cshtml" />
     <Content Include="Views\Package\RegSuccess.cshtml" />
     <Content Include="Views\PackageStatus\RemoveLoss.cshtml" />

@@ -18,17 +18,6 @@ namespace ENET_Care.Controllers
             return View();
         }
 
-        public ActionResult Receive()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Receive(string packageId)
-        {
-            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            PackageStatusLogic.ReceivePackage(Int32.Parse(packageId), staffId);
-            return View();
-        }
         public ActionResult Send()
         {
             return View();
@@ -44,17 +33,6 @@ namespace ENET_Care.Controllers
             return View();
         }
 
-        public ActionResult Discard()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Discard(string packageId)
-        {
-            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            PackageStatusLogic.DiscardPackage(Int32.Parse(packageId), staffId);
-            return View();
-        }
         public ActionResult MyInformation()
         {
             AspNetUser currentUser = UserLogic.GetUserById(User.Identity.GetUserId());
@@ -98,17 +76,6 @@ namespace ENET_Care.Controllers
                 ViewBag.DistCentres = (from d in context.DistCentres
                                        select new SelectListItem { Value = d.CentreId.ToString(), Text = d.CentreName }).ToList();
             }
-        }
-        public ActionResult Distribute()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Distribute(string packageId)
-        {
-            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            PackageStatusLogic.DistributePackage(Int32.Parse(packageId), staffId);
-            return View();
         }
     }
 }
