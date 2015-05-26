@@ -22,7 +22,13 @@ namespace ENET_Care.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Receive(string packageId)
+        {
+            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            PackageStatusLogic.ReceivePackage(Int32.Parse(packageId), staffId);
+            return View();
+        }
         public ActionResult Send()
         {
             return View();

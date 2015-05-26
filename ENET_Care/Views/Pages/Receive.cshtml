@@ -4,10 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Receive</h2>
+@using (Html.BeginForm())
+{
+    <h2>Receive</h2>
 
-<h4>Bar Code:</h4>
-<br />
-<input type="text" name="barCode" />
-<br />
-<input type="button" value="Receive" name="submitDiscard" />
+    <h4>Package Id:</h4>
+    <input type="text" name="packageId" />
+    <br />
+    <input type="submit" value="Receive" name="Receive" />
+}
