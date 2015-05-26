@@ -1,31 +1,49 @@
 ﻿
+@model List<ENET_Care.Data.DistCentre>
 @{
     ViewBag.Title = "DistributionCentreStockReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Distribution Centre Stock</h2>
+@using ENET_Care.Data
+@using ENET_Care.BusinessLogic
+@using (Html.BeginForm())
+{
+    //select dist. centre
+    @Html.DropDownList("Centres")
+    //display packages for each package type
+    //Qty   Medication  value each  total value
+    <table>
+        <tr>
+            <td>Qty</td>
+            <td>Medication</td>
+            <td>Value (each)</td>
+            <td>Total Value</td>
+        </tr>
+        
 
-<br />
+        @{decimal totalCost = 0;
+        decimal grandTotal = 0;
+        foreach (var s in MedicationLogic.GetAllMedications())
+        {
+            <tr>
+                <td>@s.Quantity</td>
+                <td>@s.Description</td>
+                <td>@s.Cost</td>
+                <td>@(s.Cost * s.Quantity)</td>
+            </tr>
+            grandTotal = (decimal)s.Quantity * (decimal)s.Cost;
+        }
+        }
+        <tr></tr>
+        <!--displays the grand total that the packages value-->
+        <tr>
+            <td></td>
+            <td></td>
+            <td><b>Grand Total</b></td>
+            <td><b>@grandTotal</b></td>
+        </tr>
+    </table>
 
-<select>
-    <option value="HeadOffice">Head Office</option>
-    <option value="Melbourne">Melbourne</option>
-    <option value="Sydney">Sydney</option>
-    <option value="Perth">Perth</option>
-</select>
-
-<br />
-
-<table>
-    <tr>
-        <td>Bar Code</td>
-        <td>Medication</td>
-        <td>Expire Date</td>
-    </tr>
-    <tr>
-        <td>3456789</td>
-        <td>Ibuprofen</td>
-        <td>12/10/2015</td>
-    </tr>
-</table>
+}
