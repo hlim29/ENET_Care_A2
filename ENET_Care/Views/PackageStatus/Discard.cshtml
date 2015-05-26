@@ -3,12 +3,23 @@
     ViewBag.Title = "Discard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>Discard</h2>
 
+<div>
+    @if (ViewBag.DiscardUpdated == true)
+    {
+        <p><font color="red"> Database updated! </font></p>
+    }
+</div>
 @using (Html.BeginForm())
 {
-    <h2>Discard</h2>
     <h4>Package Id:</h4>
-    <input type="text" name="packageId" />
+    <h6>Barcode Scan: </h6>
+    <input type="text" name="packageIdBarcode" />
+    <br />
+    <h6>List of Items: </h6>
+    @Html.DropDownList("packageIdDropdown", (IEnumerable<SelectListItem>)ViewBag.Packages)
+    <br />
     <br />
     <input type="submit" value="Discard" name="Discard" />
 }

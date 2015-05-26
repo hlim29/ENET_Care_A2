@@ -59,37 +59,71 @@ namespace ENET_Care.Controllers
         }
         public ActionResult Receive()
         {
+            ViewBag.ReceiveUpdated = false;
+            SetUpPackagesDropDown();
             return View();
         }
         [HttpPost]
-        public ActionResult Receive(string packageId)
+        public ActionResult Receive(string packageIdBarcode, string packageIdDropdown)
         {
             string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            PackageStatusLogic.ReceivePackage(Int32.Parse(packageId), staffId);
+            
+            if(packageIdBarcode == "")
+                PackageStatusLogic.ReceivePackage(Int32.Parse(packageIdDropdown), staffId);
+            else
+                PackageStatusLogic.ReceivePackage(Int32.Parse(packageIdBarcode), staffId);
+
+            ViewBag.ReceiveUpdated = true;
+            SetUpPackagesDropDown();
             return View();
         }
         public ActionResult Discard()
         {
+            ViewBag.DiscardUpdated = false;
+            SetUpPackagesDropDown();
             return View();
         }
         [HttpPost]
-        public ActionResult Discard(string packageId)
+        public ActionResult Discard(string packageIdBarcode, string packageIdDropdown)
         {
             string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            PackageStatusLogic.DiscardPackage(Int32.Parse(packageId), staffId);
+
+            if (packageIdBarcode == "")
+                PackageStatusLogic.DiscardPackage(Int32.Parse(packageIdDropdown), staffId);
+            else
+                PackageStatusLogic.DiscardPackage(Int32.Parse(packageIdBarcode), staffId);
+
+            ViewBag.DiscardUpdated = true;
+            SetUpPackagesDropDown();
             return View();
         }
         public ActionResult Distribute()
         {
+            ViewBag.DistributeUpdated = false;
+            SetUpPackagesDropDown();
             return View();
         }
         [HttpPost]
-        public ActionResult Distribute(string packageId)
+        public ActionResult Distribute(string packageIdBarcode, string packageIdDropdown)
         {
             string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            PackageStatusLogic.DistributePackage(Int32.Parse(packageId), staffId);
+
+            if (packageIdBarcode == "")
+                PackageStatusLogic.DistributePackage(Int32.Parse(packageIdDropdown), staffId);
+            else
+                PackageStatusLogic.DistributePackage(Int32.Parse(packageIdBarcode), staffId);
+           
+            ViewBag.DistributeUpdated = true;
+            SetUpPackagesDropDown();
             return View();
         }
-
+        private void SetUpPackagesDropDown()
+        {
+            using (var context = new Entities())
+            {
+                ViewBag.Packages = (from d in context.PackageStatus
+                                       select new SelectListItem { Value = d.PackageID.ToString(), Text = d.PackageID.ToString()}).ToList();
+            }
+        }
     }
 }
