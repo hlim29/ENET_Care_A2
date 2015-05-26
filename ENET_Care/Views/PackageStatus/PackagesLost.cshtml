@@ -1,0 +1,23 @@
+﻿@using ENET_Care.Data
+@model List<Package>
+@{
+    ViewBag.Title = "PackagesLost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Packages Lost</h2>
+<div>
+
+    @if (Model != null)
+    {
+        foreach (var package in Model)
+        {
+            <li>@package.PackageId</li>
+        }
+    }
+    else
+    {
+        
+    }
+</div>
+
+

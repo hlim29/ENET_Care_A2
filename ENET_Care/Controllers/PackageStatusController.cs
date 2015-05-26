@@ -25,11 +25,17 @@ namespace ENET_Care.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult UpdatePackageStatusLost()
         {
             List<Package> packageLost = PackageStatusLogic.UpdatePackageStatusLost(User.Identity.GetUserId());
-            return View();
+            return View("PackagesLost",packageLost);
+        }
+
+        [HttpPost]
+        public ActionResult PackagesLost(List<Package> packageLost)
+        {
+            return View(packageLost);
         }
 
         [HttpPost]
@@ -125,5 +131,6 @@ namespace ENET_Care.Controllers
                                        select new SelectListItem { Value = d.PackageID.ToString(), Text = d.PackageID.ToString()}).ToList();
             }
         }
+
     }
 }
