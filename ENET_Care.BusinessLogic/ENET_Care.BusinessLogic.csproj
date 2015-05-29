@@ -50,6 +50,7 @@
     <Compile Include="MedicationLogic.cs" />
     <Compile Include="PackageLogic.cs" />
     <Compile Include="PackageStatusLogic.cs" />
+    <Compile Include="Report_DistributionCentreLoss.cs" />
     <Compile Include="Report_MedicationInStock.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UserLogic.cs" />

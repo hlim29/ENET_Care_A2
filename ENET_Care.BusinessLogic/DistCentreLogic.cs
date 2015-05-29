@@ -27,5 +27,34 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static DistCentre GetDistCentreById(int distCentreId)
+        {
+            using (var context = new Entities())
+            {
+                var distCentre = from d in context.DistCentres where d.CentreId == distCentreId
+                                 select d;
+                return distCentre.FirstOrDefault();
+            }
+        }
+
+        public static List<Report_DistributionCentreLoss> GetDistributionCentreLosses()
+        {
+            List<Report_DistributionCentreLoss> centresLosses = new List<Report_DistributionCentreLoss>();
+            List<PackageStatus> packagesStatus = PackageStatusLogic.GetPackagesLostAndDiscarded();
+            using (var context = new Entities())
+            {
+                centresLosses = packagesStatus.
+                             GroupBy(l => l.DestinationCentreID).
+                             Select(x => new Report_DistributionCentreLoss
+                             {
+                                 DistCentre = GetDistCentreById((int)x.First().DestinationCentreID),
+                                 LossRatio = x.Count() / (x.Count() + PackageStatusLogic.GetPackagesStatusByStatusAndDistCentre(PackageStatusLogic.StatusEnum.Distributed, (int)x.First().DestinationCentreID).Count()),
+                                 TotalValueLost = (double)x.Sum(p => p.Package.PackageStandardType.Cost)
+                             }).ToList();
+            }
+            
+            return centresLosses;
+        }
+
     }
 }

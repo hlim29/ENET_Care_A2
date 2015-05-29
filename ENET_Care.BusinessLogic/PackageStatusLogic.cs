@@ -138,6 +138,24 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static List<PackageStatus> GetPackagesStatusByStatusAndDistCentre(StatusEnum status, int centre)
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.PackageStatus where p.Status == (int)status && p.DestinationCentreID == centre select p;
+                return query.ToList();
+            }
+        }
+
+        public static List<PackageStatus> GetPackagesLostAndDiscarded()
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.PackageStatus where p.Status == (int)StatusEnum.Lost || p.Status == (int)StatusEnum.Discarded select p;
+                return query.ToList();
+            }
+        }
+
         public static List<PackageStatus> GetPackageStatusInStockByDistributionCentreAndType(string staffId, int medicationId)
         {
             using (var context = new Entities())
