@@ -1,4 +1,4 @@
-﻿using ENET_Care.Data;
+﻿ using ENET_Care.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,30 @@ namespace ENET_Care.BusinessLogic
                 var query = from m in context.PackageStandardTypes select m;
                 return query.ToList();
             }
+        }
+
+        public static List<Report_MedicationInStock> GetMedicationsInStock()
+        {
+            List<Package> packages= PackageStatusLogic.GetPackagesListByStatus(PackageStatusLogic.StatusEnum.InStock);
+            List<Report_MedicationInStock> medications= new List<Report_MedicationInStock>();
+            using (var context = new Entities())
+            {
+                medications = packages.
+                              GroupBy(l => l.PackageStandardTypeId).
+                              Select(x => new Report_MedicationInStock { 
+                                        Medication = x.First().PackageStandardType,
+                                        Quantity = x.Count(),
+                                        TotalPrice = (double)x.Sum(p=>p.PackageStandardType.Cost)                              
+                                     }).ToList();
+
+            }
+            return medications;
+        }
+
+        public static double GetTotalAmountMedicationInStock(List<Report_MedicationInStock> medications)
+        {
+            var totalAmout = medications.Sum(m => m.TotalPrice);
+            return totalAmout;
         }
     }
 }
