@@ -12,16 +12,11 @@ namespace ENET_Care.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRole
+    public partial class C__MigrationHistory
     {
-        public AspNetRole()
-        {
-            this.AspNetUserRoles = new HashSet<AspNetUserRole>();
-        }
-    
-        public string Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

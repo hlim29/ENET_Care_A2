@@ -58,5 +58,15 @@ namespace ENET_Care.Tests
             AspNetUser user = UserLogic.GetUserById(id);
             Assert.AreEqual(newCentreId, user.CentreId);
         }
+
+        [TestMethod]
+        public void UserTest_GetAllDoctors()
+        {
+            foreach (AspNetUser user in UserLogic.GetAllDoctors()){
+                Debug.WriteLine(user.Email);
+                
+            }
+            Assert.AreEqual(1, UserLogic.GetAllDoctors().Count);
+        }
     }
 }

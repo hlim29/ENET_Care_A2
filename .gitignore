@@ -4,3 +4,7 @@
 
 /ENET_Care.BusinessLogic/bin/Debug
 /ENET_Care.BusinessLogic/obj/Debug
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

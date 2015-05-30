@@ -67,5 +67,19 @@ namespace ENET_Care.BusinessLogic
         {
             return (int)GetDistCentreByUserId(id).CentreId;
         }
+
+        public static List<AspNetUser> GetAllDoctors()
+        {
+            using (var context = new Entities())
+            {
+                var query = from user in context.AspNetUsers
+                            join f in context.AspNetUserRoles on user.Id equals f.UserId
+                            join t in context.AspNetRoles on f.RoleId equals t.Id
+                            where t.Name == "doctor"
+                            select user;
+                return query.ToList();
+            }
+            //return null;
+        }
     }
 }

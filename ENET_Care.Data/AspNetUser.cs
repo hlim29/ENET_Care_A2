@@ -16,9 +16,10 @@ namespace ENET_Care.Data
     {
         public AspNetUser()
         {
+            this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.AspNetUserRoles = new HashSet<AspNetUserRole>();
             this.PackageStatus = new HashSet<PackageStatus>();
-            this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
         public string Id { get; set; }
@@ -37,9 +38,10 @@ namespace ENET_Care.Data
         public string UserName { get; set; }
         public Nullable<int> CentreId { get; set; }
     
+        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
         public virtual DistCentre DistCentre { get; set; }
         public virtual ICollection<PackageStatus> PackageStatus { get; set; }
-        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

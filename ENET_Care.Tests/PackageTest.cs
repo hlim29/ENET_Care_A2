@@ -32,16 +32,12 @@ namespace ENET_Care.Tests
             Assert.AreEqual(PackageStatusLogic.DiscardPackage(100000, "y783156"),null);
         }
 
-        [TestMethod]
-        public void PackageTest_RegisterInvalidStatus()
-        {
-            PackageStatusLogic.RegisterArrival(892417, 12489, "3240a097-a1ca-400a-b88b-0847a35e7aad");
-        }
 
         [TestMethod]
         public void PackageTest_TryGetInvalidPackageStatus()
         {
-            PackageStatusLogic.GetPackageStatusById(76589437);
+            PackageStatus ps = PackageStatusLogic.GetPackageStatusById(76589437);
+            Assert.AreEqual(null, ps);
         }
     }
 }

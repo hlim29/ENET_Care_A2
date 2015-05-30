@@ -12,19 +12,13 @@ namespace ENET_Care.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class PackageStatus
+    public partial class AspNetUserClaim
     {
-        public int PackageStatusID { get; set; }
-        public Nullable<int> PackageID { get; set; }
-        public Nullable<int> SourceCentreID { get; set; }
-        public Nullable<int> DestinationCentreID { get; set; }
-        public Nullable<int> Status { get; set; }
-        public string StaffID { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual DistCentre SourceCentre { get; set; }
-        public virtual DistCentre DestCentre { get; set; }
-        public virtual Package Package { get; set; }
-        public virtual Status Status1 { get; set; }
     }
 }

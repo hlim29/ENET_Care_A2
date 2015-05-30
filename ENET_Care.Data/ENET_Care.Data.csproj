@@ -56,7 +56,16 @@
     <Compile Include="AspNetUser.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserRole.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DistCentre.cs">

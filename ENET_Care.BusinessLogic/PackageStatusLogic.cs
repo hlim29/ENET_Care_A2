@@ -33,9 +33,10 @@ namespace ENET_Care.BusinessLogic
             p.Status = (int)StatusEnum.InStock;
             using (var context = new Entities())
             {
-                context.PackageStatus.Add(p);
-                context.SaveChanges();
+                    context.PackageStatus.Add(p);
+                    context.SaveChanges();
             }
+
         }
 
         public static PackageStatus ReceivePackage(int packageId, string staffId)
@@ -110,7 +111,7 @@ namespace ENET_Care.BusinessLogic
             using (var context = new Entities())
             {
                 var query = from p in context.PackageStatus where p.PackageID == packageId select p;
-                return query.First();
+                return query.FirstOrDefault();
             }
         }
 
