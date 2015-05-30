@@ -1,25 +1,25 @@
-﻿@model List<ENET_Care.Data.DistCentre>
+﻿@using ENET_Care.Data
+@using ENET_Care.BusinessLogic
+@model List<Report_MedicationInStock>
 @{
     ViewBag.Title = "GlobalStock";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Global Stock</h2>
-@using ENET_Care.Data
-@using ENET_Care.BusinessLogic
+
 @using (Html.BeginForm())
 {
     <table>
         <tr>
-            <td>Qty</td>
             <td>Medication</td>
-            <td>Dist. Centre</td>
+            <td>Quantity</td>
             <td>Value</td>
         </tr>
-        @foreach(var s in MedicationLogic.GetMedicationsInStock())
+        @foreach(var s in Model)
         {
             <tr>
-                <td>@s.Medication</td>
+                <td>@s.Medication.Description</td>
                 <td>@s.Quantity</td>
                 <td>@s.TotalPrice</td>
             </tr>
@@ -29,7 +29,7 @@
             <td></td>
             <td></td>
             <td><b>Grand Total</b></td>
-            <td><b>@MedicationLogic.GetTotalAmountMedication(MedicationLogic.GetMedicationsInStock())</b></td>
+            <td><b>@ViewBag.GrandTotal</b></td>
         </tr>
     </table>
 }

@@ -94,6 +94,35 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static List<Report_MedicationInTransit> GetMedicationsInTransit()
+        {
+            using (var context = new Entities())
+            {
+                List<PackageStatus> packages = new List<PackageStatus>();
+                packages = (from p in context.PackageStatus
+                            where p.Status == (int)PackageStatusLogic.StatusEnum.InTransit
+                            select p).ToList();
+                List<Report_MedicationInTransit> medications = new List<Report_MedicationInTransit>();
+                medications = (from package in packages
+                               group package by new
+                               {
+                                   package.DestinationCentreID,
+                                   package.SourceCentreID,
+                                   package.Package.PackageStandardTypeId
+                               } into p
+                               select new Report_MedicationInTransit
+                               {
+                                   Medication = p.First().Package.PackageStandardType,
+                                   Quantity = p.Count(),
+                                   TotalPrice = (double)p.Sum(x => x.Package.PackageStandardType.Cost),
+                                   //SourceCentre = p.First()
+                               }).ToList();
+
+
+                return medications;
+            }
+        }
+
         public static double GetTotalAmountMedication(List<Report_MedicationInStock> medications)
         {
             var totalAmout = medications.Sum(m => m.TotalPrice);

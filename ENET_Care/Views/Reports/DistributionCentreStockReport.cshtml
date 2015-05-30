@@ -1,44 +1,48 @@
-﻿
-@model List<ENET_Care.Data.DistCentre>
+﻿@using ENET_Care.Data
+@using ENET_Care.BusinessLogic
+@model List<Report_MedicationInStock>
 @{
     ViewBag.Title = "DistributionCentreStockReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Distribution Centre Stock</h2>
-@using ENET_Care.Data
-@using ENET_Care.BusinessLogic
+
 @using (Html.BeginForm())
 {
     //dist. centre
     @Html.DropDownList("Centres")
     //display packages for each package type
     //Qty   Medication  value each  total value
+    <input type="submit" value="Show report">
     <table>
-        <tr>
-            <td>Qty</td>
+        <tr> 
             <td>Medication</td>
+            <td>Quantity</td>
             <td>Value (each)</td>
             <td>Total Value</td>
         </tr>
         
 
-       @foreach (var s in MedicationLogic.GetMedicationsInStockByDistCentre(3))
+       @if (Model != null) { 
+        foreach (var s in Model)
         {
-            <tr>
+            <tr> 
+                <td>@s.Medication.Description</td>
                 <td>@s.Quantity</td>
-                <td>@s.Medication</td>
-                <td>@s.TotalPrice</td>
-                <td>AUD$@(s.TotalPrice * s.Quantity)</td>
+                <td>@s.Medication.Cost</td>
+                <td>AUD$(@s.TotalPrice)</td>
             </tr>
+        
         }
         <tr></tr>
         <tr>
             <td></td>
             <td></td>
             <td><b>grand total</b></td>
-            <td><b>AUD$@MedicationLogic.GetTotalAmountMedication(MedicationLogic.GetMedicationsInStockByDistCentre(3))</b></td>
+            <td><b>AUD$@ViewBag.GrandTotal</b></td>
         </tr>
+       }
     </table>
 
 }

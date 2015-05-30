@@ -52,6 +52,7 @@
     <Compile Include="PackageStatusLogic.cs" />
     <Compile Include="Report_DistributionCentreLoss.cs" />
     <Compile Include="Report_MedicationInStock.cs" />
+    <Compile Include="Report_MedicationInTransit.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

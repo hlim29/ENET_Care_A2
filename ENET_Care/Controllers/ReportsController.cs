@@ -23,6 +23,15 @@ namespace ENET_Care.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult DistributionCentreStockReport(int centres)
+        {
+            SetupCentreList();
+            List<Report_MedicationInStock> medications = MedicationLogic.GetMedicationsInStockByDistCentre(centres);
+            ViewBag.GrandTotal = MedicationLogic.GetTotalAmountMedication(medications);
+            return View(medications);
+        }
+
         private void SetupCentreList()
         {
             ICollection<DistCentre> centreList = DistCentreLogic.GetAllDistCentre();
@@ -42,8 +51,7 @@ namespace ENET_Care.Controllers
 
         public ActionResult DistributionCentreLossesReport()
         {
-            SetupCentreList();
-            return View();
+            return View(DistCentreLogic.GetDistributionCentreLosses());
         }
 
         public ActionResult DoctorActivityReport()
@@ -58,7 +66,9 @@ namespace ENET_Care.Controllers
 
         public ActionResult GlobalStock()
         {
-            return View();
+            List<Report_MedicationInStock> medications= MedicationLogic.GetMedicationsInStock();
+            ViewBag.GrandTotal = MedicationLogic.GetTotalAmountMedication(medications);
+            return View(medications);
         }
 
         public ActionResult MyInformation()
