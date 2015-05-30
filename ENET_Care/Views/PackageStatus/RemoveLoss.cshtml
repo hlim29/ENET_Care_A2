@@ -1,34 +1,35 @@
-﻿@model List<ENET_Care.Data.PackageStandardType>
+﻿@using ENET_Care.BusinessLogic
+@using ENET_Care.Data
+@model List<Package>
 @{
     ViewBag.Title = "RemoveLoss";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Remove Loss</h2>
 <p class="alert-danger">@ViewBag.Error</p>
-@using ENET_Care.BusinessLogic
+
 @using (Html.BeginForm())
-    {
+{
     <table>
         <tr>
             <td>
-                Select the medication type
+                <b>Package Standard Type</b>
             </td>
+        </tr>
         <tr>
-            <td>
+            <td align="right">
                 @Html.DropDownList("medications")
             </td>
         </tr>
         <tr>
             <td>
-                Barcode
+                <b>Barcode</b>
             </td>
         </tr>
         <tr>
             <td>
-               @Html.TextBox("barcode")
+                @Html.TextBox("barcode")
             </td>
-        </tr>
-        <tr>
             <td>
                 <input type="submit" value="Scan" name="action" />
             </td>
@@ -39,14 +40,24 @@
             </td>
         </tr>
     </table>
-    }
+}
 
 <div>
-    
+    <br />
+    @if (Model != null)
+    {
+        <table>
+            <tr>
+                <td><b>Scanned Barcodes</b></td>
+            </tr>
+            @foreach (var package in Model)
+            {
+                <tr>
+                    <td>@package.PackageId</td>
+                </tr>
 
-        @foreach (var package in PackageStatusLogic.getPackagesInStockList())
-        {
-            <li>@package.PackageId</li>
-        }
-    
+            }
+        </table>
+    }
+
 </div>

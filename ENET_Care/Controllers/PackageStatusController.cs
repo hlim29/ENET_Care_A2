@@ -49,10 +49,11 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult RemoveLoss(string barcode, int medications, string action)
         {
-            
+
             if (action.Equals("Scan"))
             {
                 SetupMedicationList();
+                List<Package> packages = PackageStatusLogic.getPackagesInStockList();
                 try
                 {
                     int barcodeValue = int.Parse(barcode);
@@ -61,19 +62,19 @@ namespace ENET_Care.Controllers
                 catch (FormatException) //If the barcode isn't a number
                 {
                     ViewBag.Error = "Please enter a valid barcode";
-                    return View();
+                    return View(packages);
                 }
                 catch (OverflowException) //The barcode is an int32, cannot exceed 2^31 - 1
                 {
                     ViewBag.Error = "Please enter a valid barcode";
-                    return View();
+                    return View(packages);
                 }
                 catch (InvalidOperationException) //If no package record exists
                 {
                     ViewBag.Error = "The barcode you have entered doesn't exist/has not been registered";
-                    return View();
+                    return View(packages);
                 }
-                return View();
+                return View(packages);
             }
             else
             {

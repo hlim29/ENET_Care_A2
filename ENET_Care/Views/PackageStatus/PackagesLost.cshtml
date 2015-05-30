@@ -9,15 +9,21 @@
 
     @if (Model != null)
     {
-        foreach (var package in Model)
-        {
-            @package.PackageId
-        }
+        <table>
+            <tr>
+                <td><b>Barcodes Lost</b></td>
+            </tr>
+            @foreach (var package in Model)
+            {
+                <tr>
+                    <td>@package.PackageId</td>
+                </tr>
+
+            }
+        </table>
     }
-    else
-    {
-        
-    }
+
 </div>
+
 
 
