@@ -115,7 +115,8 @@ namespace ENET_Care.BusinessLogic
                                    Medication = p.First().Package.PackageStandardType,
                                    Quantity = p.Count(),
                                    TotalPrice = (double)p.Sum(x => x.Package.PackageStandardType.Cost),
-                                   //SourceCentre = p.First()
+                                   SourceCentre = p.First().SourceCentre,
+                                   DestinationCentre = p.First().DestCentre
                                }).ToList();
 
 
@@ -127,6 +128,12 @@ namespace ENET_Care.BusinessLogic
         {
             var totalAmout = medications.Sum(m => m.TotalPrice);
             return totalAmout;
+        }
+
+        public static double GetTotalAmoutMedicationInTransit(List<Report_MedicationInTransit> medications)
+        {
+            var totalAmount = medications.Sum(m => m.TotalPrice);
+            return totalAmount;
         }
     }
 }

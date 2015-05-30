@@ -10,23 +10,45 @@
 
 @using (Html.BeginForm())
 {
+    @*Html.DropDownList("packageIdDropdown", "Centres")*@
+    <b></b>
     //display packages that are missing
     //Barcode   Medication  Expire Date From    To
         foreach(var s in Model)
-         { 
-            <table>
-                <tr>
-                    <td>@s.DistCentre.CentreName</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Total Value:</td>
-                    <td>AUD$@s.TotalValueLost</td>
-                </tr>
-                <tr>
-                    <td>Ratio</td>
-                    <td>@(s.LossRatio)%</td>
-                </tr>
-            </table>
+         {
+             if (s.LossRatio < 9)
+             { 
+                <table>
+                    <tr>
+                        <td>@s.DistCentre.CentreName</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Total Value:</td>
+                        <td>AUD$@s.TotalValueLost</td>
+                    </tr>
+                    <tr>
+                        <td>Ratio</td>
+                        <td>@s.LossRatio%</td>
+                    </tr>
+                </table>
+             }
+             else
+             {
+                 <table style="background-color: #FFCCCCS">
+                    <tr>
+                        <td>@s.DistCentre.CentreName</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Total Value:</td>
+                        <td>AUD$@s.TotalValueLost</td>
+                    </tr>
+                    <tr>
+                        <td>Ratio</td>
+                        <td>@(s.LossRatio)%</td>
+                    </tr>
+                </table>
+             }
         }
 }

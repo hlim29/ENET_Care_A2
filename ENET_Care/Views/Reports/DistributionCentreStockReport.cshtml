@@ -17,10 +17,10 @@
     <input type="submit" value="Show report">
     <table>
         <tr> 
-            <td>Medication</td>
-            <td>Quantity</td>
-            <td>Value (each)</td>
-            <td>Total Value</td>
+            <td width="150">Medication</td>
+            <td width="150">Quantity</td>
+            <td width="150">Price (ea.)</td>
+            <td width="150">Total Price</td>
         </tr>
         
 
@@ -31,15 +31,20 @@
                 <td>@s.Medication.Description</td>
                 <td>@s.Quantity</td>
                 <td>@s.Medication.Cost</td>
-                <td>AUD$(@s.TotalPrice)</td>
+                <td>AUD$@s.TotalPrice</td>
             </tr>
         
         }
-        <tr></tr>
+        <tr>
+            <td><br /></td>
+            <td><br /></td>
+            <td><br /></td>
+            <td><br/></td>
+        </tr>
         <tr>
             <td></td>
             <td></td>
-            <td><b>grand total</b></td>
+            <td><b>GRAND TOTAL</b></td>
             <td><b>AUD$@ViewBag.GrandTotal</b></td>
         </tr>
        }
