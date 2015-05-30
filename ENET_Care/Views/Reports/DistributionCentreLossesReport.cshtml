@@ -16,7 +16,7 @@
     //Barcode   Medication  Expire Date From    To
         foreach(var s in Model)
          {
-             if ((s.LossRatio * 100) < 9)
+             if (s.LossRatio < 9)
              { 
                 <table>
                     <tr>
@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <td>Ratio</td>
-                        <td>@(s.LossRatio * 100)%</td>
+                        <td>@s.LossRatio%</td>
                     </tr>
                 </table>
              }

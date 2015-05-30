@@ -50,7 +50,7 @@ namespace ENET_Care.BusinessLogic
                                  group pS by pS.DestinationCentreID into x
                                  select new Report_DistributionCentreLoss {
                                     DistCentre = GetDistCentreById((int)x.First().DestinationCentreID),
-                                    LossRatio = x.Count() / (x.Count() + PackageStatusLogic.GetPackagesStatusByStatusAndDistCentre(PackageStatusLogic.StatusEnum.Distributed, (int)x.First().DestinationCentreID).Count()),
+                                    LossRatio = (x.Count() / (x.Count() + PackageStatusLogic.GetPackagesStatusByStatusAndDistCentre(PackageStatusLogic.StatusEnum.Distributed, (int)x.First().DestinationCentreID).Count()))*100,
                                     TotalValueLost = (double)x.Sum(p => p.Package.PackageStandardType.Cost)
                                  }).ToList();
 
