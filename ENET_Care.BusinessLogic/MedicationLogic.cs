@@ -18,20 +18,30 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static PackageStandardType GetMedicationById(int id)
+        {
+            using (var context = new Entities())
+            {
+                var query = from m in context.PackageStandardTypes where m.Id == id select m;
+                return query.FirstOrDefault();
+            }
+        }
+
         public static List<Report_MedicationInStock> GetMedicationsInStock()
         {
             using (var context = new Entities())
             {
-                List<Package> packages = PackageStatusLogic.GetPackagesListByStatus(PackageStatusLogic.StatusEnum.InStock);
+                List<Package> packages = new List<Package>();
+                packages = (from p in context.PackageStatus where p.Status == (int)PackageStatusLogic.StatusEnum.InStock select p.Package).ToList();
                 List<Report_MedicationInStock> medications = new List<Report_MedicationInStock>();
-                medications = packages.
-                              GroupBy(l => l.PackageStandardTypeId).
-                              Select(x => new Report_MedicationInStock
-                              {
-                                  Medication = x.First().PackageStandardType,
-                                  Quantity = x.Count(),
-                                  TotalPrice = (double)x.Sum(p => p.PackageStandardType.Cost)
-                              }).ToList();
+                medications = (from package in packages
+                               group package by package.PackageStandardTypeId into p
+                               select new Report_MedicationInStock
+                               {
+                                   Medication = p.First().PackageStandardType,
+                                   Quantity = p.Count(),
+                                   TotalPrice = (double)p.Sum(x => x.PackageStandardType.Cost)
+                               }).ToList();
 
 
                 return medications;

@@ -39,21 +39,24 @@ namespace ENET_Care.BusinessLogic
 
         public static List<Report_DistributionCentreLoss> GetDistributionCentreLosses()
         {
-            List<Report_DistributionCentreLoss> centresLosses = new List<Report_DistributionCentreLoss>();
-            List<PackageStatus> packagesStatus = PackageStatusLogic.GetPackagesLostAndDiscarded();
             using (var context = new Entities())
             {
-                centresLosses = packagesStatus.
-                             GroupBy(l => l.DestinationCentreID).
-                             Select(x => new Report_DistributionCentreLoss
-                             {
-                                 DistCentre = GetDistCentreById((int)x.First().DestinationCentreID),
-                                 LossRatio = x.Count() / (x.Count() + PackageStatusLogic.GetPackagesStatusByStatusAndDistCentre(PackageStatusLogic.StatusEnum.Distributed, (int)x.First().DestinationCentreID).Count()),
-                                 TotalValueLost = (double)x.Sum(p => p.Package.PackageStandardType.Cost)
-                             }).ToList();
+                List<Report_DistributionCentreLoss> centresLosses = new List<Report_DistributionCentreLoss>();
+                List<PackageStatus> packagesStatus = new List<PackageStatus>();
+
+                packagesStatus = (from p in context.PackageStatus where p.Status == (int)PackageStatusLogic.StatusEnum.Lost || p.Status == (int)PackageStatusLogic.StatusEnum.Discarded select p).ToList();
+
+                centresLosses = (from pS in packagesStatus
+                                 group pS by pS.DestinationCentreID into x
+                                 select new Report_DistributionCentreLoss {
+                                    DistCentre = GetDistCentreById((int)x.First().DestinationCentreID),
+                                    LossRatio = x.Count() / (x.Count() + PackageStatusLogic.GetPackagesStatusByStatusAndDistCentre(PackageStatusLogic.StatusEnum.Distributed, (int)x.First().DestinationCentreID).Count()),
+                                    TotalValueLost = (double)x.Sum(p => p.Package.PackageStandardType.Cost)
+                                 }).ToList();
+
+
+                return centresLosses;
             }
-            
-            return centresLosses;
         }
 
     }
