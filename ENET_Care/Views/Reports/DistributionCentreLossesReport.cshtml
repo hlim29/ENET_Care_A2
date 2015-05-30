@@ -1,24 +1,33 @@
-﻿
+﻿@model List<ENET_Care.Data.DistCentre>
 @{
     ViewBag.Title = "DistributionCentreLossesReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Distribution Centre Losses</h2>
-
-<table>
-    <tr>
-        <td>Bar Code</td>
-        <td>Medication</td>
-        <td>Expire Date</td>
-        <td>From</td>
-        <td>To</td>
-    </tr>
-    <tr>
-        <td>3456789</td>
-        <td>Ibuprofen</td>
-        <td>12/10/2015</td>
-        <td>Head Office</td>
-        <td>Melbourne</td>
-    </tr>
-</table>
+@using ENET_Care.Data
+@using ENET_Care.BusinessLogic
+@using (Html.BeginForm())
+{
+    //select dist. centre
+    @Html.DropDownList("Centres")
+    //display packages that are missing
+    //Barcode   Medication  Expire Date From    To
+    <table>
+        <tr>
+            <td>Bar Code</td>
+            <td>Medication</td>
+            <td>Expire Date</td>
+            <td>Quantity</td>
+        </tr>
+        @foreach(var s in PackageStatusLogic.GetAllLostPackages())
+        { 
+            <tr>
+                <td>@s.PackageId</td>
+                <td>@s.PackageStandardType</td>
+                <td>@s.ExpiryDate</td>
+                <td>@s.Quantity</td>
+            </tr>
+        }
+    </table>
+}

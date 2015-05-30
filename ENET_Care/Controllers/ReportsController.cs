@@ -42,6 +42,7 @@ namespace ENET_Care.Controllers
 
         public ActionResult DistributionCentreLossesReport()
         {
+            SetupCentreList();
             return View();
         }
 
