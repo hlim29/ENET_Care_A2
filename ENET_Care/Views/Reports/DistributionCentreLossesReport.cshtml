@@ -9,8 +9,6 @@
 @using ENET_Care.BusinessLogic
 @using (Html.BeginForm())
 {
-    //select dist. centre
-    @Html.DropDownList("Centres")
     //display packages that are missing
     //Barcode   Medication  Expire Date From    To
         foreach(var s in DistCentreLogic.GetDistributionCentreLosses())

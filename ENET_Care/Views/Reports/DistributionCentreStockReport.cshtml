@@ -10,8 +10,6 @@
 @using ENET_Care.BusinessLogic
 @using (Html.BeginForm())
 {
-    //select dist. centre
-    @Html.DropDownList("Centres")
     //display packages for each package type
     //Qty   Medication  value each  total value
     <table>
@@ -23,27 +21,23 @@
         </tr>
         
 
-        @{decimal totalCost = 0;
-        decimal grandTotal = 0;
-        foreach (var s in MedicationLogic.GetAllMedications())
+       @* @foreach (var s in medicationlogic.getmedicationsinstock())
         {
             <tr>
-                <td>@s.Quantity</td>
-                <td>@s.Description</td>
-                <td>@s.Cost</td>
-                <td>@(s.Cost * s.Quantity)</td>
+                <td>@s.quantity</td>
+                <td>@s.medication</td>
+                <td>@s.totalprice</td>
+                <td>@(s.totalprice * s.quantity)</td>
             </tr>
-            grandTotal = (decimal)s.Quantity * (decimal)s.Cost;
-        }
-        }
+        }*@
         <tr></tr>
-        <!--displays the grand total that the packages value-->
+       <!----displays the grand total that the packages value
         <tr>
             <td></td>
             <td></td>
-            <td><b>Grand Total</b></td>
-            <td><b>@grandTotal</b></td>
-        </tr>
+            <td><b>grand total</b></td>
+            <td><b>@*medicationlogic.gettotalamountmedicationinstock(medicationlogic.getmedicationsinstock())*@</b></td>
+        </tr-->
     </table>
 
 }
