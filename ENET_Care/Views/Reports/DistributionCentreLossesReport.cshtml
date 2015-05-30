@@ -13,21 +13,21 @@
     @Html.DropDownList("Centres")
     //display packages that are missing
     //Barcode   Medication  Expire Date From    To
-    <table>
-        <tr>
-            <td>Bar Code</td>
-            <td>Medication</td>
-            <td>Expire Date</td>
-            <td>Quantity</td>
-        </tr>
-        @foreach(var s in PackageStatusLogic.GetAllLostPackages())
-        { 
-            <tr>
-                <td>@s.PackageId</td>
-                <td>@s.PackageStandardType</td>
-                <td>@s.ExpiryDate</td>
-                <td>@s.Quantity</td>
-            </tr>
+        foreach(var s in DistCentreLogic.GetDistributionCentreLosses())
+         { 
+            <table>
+                <tr>
+                    <td>@s.DistCentre</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Total Value:</td>
+                    <td>@s.TotalValueLost</td>
+                </tr>
+                <tr>
+                    <td>Ratio</td>
+                    <td>@s.LossRatio</td>
+                </tr>
+            </table>
         }
-    </table>
 }
