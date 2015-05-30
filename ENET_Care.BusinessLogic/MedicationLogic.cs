@@ -48,6 +48,29 @@ namespace ENET_Care.BusinessLogic
             }
         }
 
+        public static List<Report_MedicationInStock> GetMedicationsInStockByDistCentre(int centreId)
+        {
+            using (var context = new Entities())
+            {
+                List<Package> packages = new List<Package>();
+                packages = (from p in context.PackageStatus 
+                            where p.Status == (int)PackageStatusLogic.StatusEnum.InStock && p.DestinationCentreID == centreId 
+                            select p.Package).ToList();
+                List<Report_MedicationInStock> medications = new List<Report_MedicationInStock>();
+                medications = (from package in packages
+                               group package by package.PackageStandardTypeId into p
+                               select new Report_MedicationInStock
+                               {
+                                   Medication = p.First().PackageStandardType,
+                                   Quantity = p.Count(),
+                                   TotalPrice = (double)p.Sum(x => x.PackageStandardType.Cost)
+                               }).ToList();
+
+
+                return medications;
+            }
+        }
+
         public static double GetTotalAmountMedicationInStock(List<Report_MedicationInStock> medications)
         {
             var totalAmout = medications.Sum(m => m.TotalPrice);
