@@ -10,13 +10,13 @@
 
 @using (Html.BeginForm())
 {
-    <table>
+    <table class="table table-striped table-bordered">
         <tr>
-            <td>Medication</td>
-            <td>Quantity</td>
-            <td>Value</td>
+            <th>Medication</th>
+            <th>Quantity</th>
+            <th>Value</th>
         </tr>
-        @foreach(var s in Model)
+        @foreach (var s in Model)
         {
             <tr>
                 <td>@s.Medication.Description</td>
@@ -26,7 +26,6 @@
         }
         <tr></tr>
         <tr>
-            <td></td>
             <td></td>
             <td><b>Grand Total</b></td>
             <td><b>@ViewBag.GrandTotal</b></td>

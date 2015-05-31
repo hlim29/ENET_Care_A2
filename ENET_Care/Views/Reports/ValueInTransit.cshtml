@@ -9,36 +9,31 @@
 <h2>Value In Transit</h2>
 @using (Html.BeginForm())
 {
-    <table>
-        @foreach (var s in PackageStatusLogic.GetInTransitPackages())
+    <table class="table table-striped table-bordered">
+
+        @foreach (var s in PackageStatusLogic.GetStatusesInTransitPackages())
         {
+
             <tr>
-                <td><b>From Sydney to Melbourne</b></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th colspan="4"><b>From @s.SourceCentre.CentreName to @s.DestCentre.CentreName</b></th>
+
             </tr>
             <tr>
-                <td>Qty</td>
-                <td>Medication</td>
-                <td>Expire Date</td>
-                <td>Value</td>
+                <td><b>Qty</b></td>
+                <td><b>Medication</b></td>
+                <td><b>Expire Date</b></td>
+                <td><b>Value</b></td>
             </tr>
             <tr>
-                <td>@s.Quantity</td>
-                <td>@*s.PackageStandardType.Description*@</td>
-                <td>@s.ExpiryDate</td>
-                <td>@*s.PackageStandardType.Cost*@</td>
+                <td>@s.Package.PackageStandardType.Quantity</td>
+                <td>@s.Package.PackageStandardType.Description</td>
+                <td>@s.Package.ExpiryDate</td>
+                <td>@s.Package.PackageStandardType.Cost</td>
+
             </tr>
         }
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><b>Total: </b></td>
-        </tr>
     </table>
 }
 
 
-<b>Grand Total: $90</b>
+<b>Grand Total: $@ViewBag.TotalTransitValue</b>

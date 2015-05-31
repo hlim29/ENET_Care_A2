@@ -15,39 +15,34 @@
     //display packages for each package type
     //Qty   Medication  value each  total value
     <input type="submit" value="Show report">
-    <table>
-        <tr> 
-            <td width="150">Medication</td>
-            <td width="150">Quantity</td>
-            <td width="150">Price (ea.)</td>
-            <td width="150">Total Price</td>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th >Medication</th>
+            <th >Quantity</th>
+            <th >Price (ea.)</th>
+            <th >Total Price</th>
         </tr>
-        
 
-       @if (Model != null) { 
-        foreach (var s in Model)
+
+        @if (Model != null)
         {
-            <tr> 
-                <td>@s.Medication.Description</td>
-                <td>@s.Quantity</td>
-                <td>@s.Medication.Cost</td>
-                <td>AUD$@s.TotalPrice</td>
+            foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.Medication.Description</td>
+                    <td>@s.Quantity</td>
+                    <td>@s.Medication.Cost</td>
+                    <td>AUD$@s.TotalPrice</td>
+                </tr>
+
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td><b>GRAND TOTAL</b></td>
+                <td><b>AUD$@ViewBag.GrandTotal</b></td>
             </tr>
-        
         }
-        <tr>
-            <td><br /></td>
-            <td><br /></td>
-            <td><br /></td>
-            <td><br/></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td><b>GRAND TOTAL</b></td>
-            <td><b>AUD$@ViewBag.GrandTotal</b></td>
-        </tr>
-       }
     </table>
 
 }

@@ -61,6 +61,11 @@ namespace ENET_Care.Controllers
 
         public ActionResult ValueInTransit()
         {
+            decimal total = 0;
+            foreach (var s in PackageStatusLogic.GetStatusesInTransitPackages()){
+                total += (decimal)s.Package.PackageStandardType.Cost;
+            }
+            ViewBag.TotalTransitValue = total;
             return View();
         }
 

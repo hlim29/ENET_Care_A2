@@ -125,6 +125,17 @@ namespace ENET_Care.BusinessLogic
             return GetPackagesListByStatus(StatusEnum.InTransit);
         }
 
+        public static List<PackageStatus> GetStatusesInTransitPackages()
+        {
+            using (var context = new Entities())
+            {
+                var query = from p in context.PackageStatus.Include("SourceCentre").Include("AspNetUser").Include("DestCentre").Include("Status1").Include("Package").Include("Package.PackageStandardType")
+                            where p.PackageStatusID == (int)StatusEnum.InTransit
+                            select p;
+                return query.ToList();
+            }
+        }
+
         /// <summary>
         /// Retrives a list of Packages by the status parameter. This method was created to reduce repetitive code.
         /// </summary>
