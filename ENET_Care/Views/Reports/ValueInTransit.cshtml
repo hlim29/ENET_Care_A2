@@ -1,58 +1,44 @@
-﻿
+﻿@using ENET_Care.Data
+@using ENET_Care.BusinessLogic
+@model List<Report_MedicationInStock>
 @{
     ViewBag.Title = "ValueInTransit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ValueInTransit</h2>
+<h2>Value In Transit</h2>
+@using (Html.BeginForm())
+{
+    <table>
+        @foreach (var s in PackageStatusLogic.GetInTransitPackages())
+        {
+            <tr>
+                <td><b>From Sydney to Melbourne</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Qty</td>
+                <td>Medication</td>
+                <td>Expire Date</td>
+                <td>Value</td>
+            </tr>
+            <tr>
+                <td>@s.Quantity</td>
+                <td>@*s.PackageStandardType.Description*@</td>
+                <td>@s.ExpiryDate</td>
+                <td>@*s.PackageStandardType.Cost*@</td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>Total: </b></td>
+        </tr>
+    </table>
+}
 
-<h3>From Sydney to Melbourne</h3>
 
-<table>
-    <tr>
-        <td>Qty</td>
-        <td>Medication</td>
-        <td>Expire Date</td>
-        <td>Value</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Ibuprofen</td>
-        <td>12/10/2015</td>
-        <td>$15</td>
-    </tr>
-</table>
-
-<br />
-
-<h3><b>Total: $45</b></h3>
-
-<br />
-<br />
-
-<h3>From Head Office to Melbourne</h3>
-
-<br />
-
-<table>
-    <tr>
-        <td>Qty</td>
-        <td>Medication</td>
-        <td>Expire Date</td>
-        <td>Value</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Ibuprofen</td>
-        <td>12/10/2015</td>
-        <td>$15</td>
-    </tr>
-</table>
-
-<br />
-
-<h3><b>Total: $45</b></h3>
-
-<br />
-
-<h2><b>Grand Total: $90</b></h2>
+<b>Grand Total: $90</b>

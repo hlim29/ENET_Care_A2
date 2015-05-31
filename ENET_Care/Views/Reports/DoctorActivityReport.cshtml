@@ -1,78 +1,54 @@
-﻿
+﻿@using ENET_Care.Data
+@using ENET_Care.BusinessLogic
+@model List<Report_MedicationInStock>
 @{
     ViewBag.Title = "DoctorActivityReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Doctor Activity</h2>
-
-<table>
-    <tr>
-        <td>
-             <b>Dr. James Bond</b>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <u>Qty </u>
-        </td>
-        <td>
-            <u>Type</u>
-        </td>
-        <td>
-            <u>Price</u>
-        </td>
-        <td>
-            <u>Subtotal</u>
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            3
-        </td>
-        <td>
-            Paracetamol
-        </td>
-        <td>
-            $15
-        </td>
-        <td>
-            $45
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-            <hr />
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-            Total: $45
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-            <h3>
-                <b>Grand Total $45</b>
-            </h3>
-        </td>
-    </tr>
-</table>
+@using (Html.BeginForm())
+{
+    double grandTotal = 0;
+    <table>
+        @foreach(var s in UserLogic.GetAllDoctors())
+        {
+            <tr>
+                <td width="150"><b>@s.FirstName @s.LastName</b></td>
+                <td width="150"></td>
+                <td width="150"></td>
+                <td width="150"></td>
+            </tr>
+            <tr>
+                <td>Qty</td>
+                <td>Type</td>
+                <td>Price</td>
+                <td>Subtotal</td>
+            </tr>
+            foreach(var d in MedicationLogic.GetMedicationsDistributedByDoctor(s.Id))
+            {
+                <tr>
+                    <td>@d.Quantity</td>
+                    <td>@d.Medication.Description</td>
+                    <td>@d.Medication.Cost</td>
+                    <td>@d.TotalPrice</td>
+                </tr>
+                grandTotal += d.TotalPrice;
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </table>
+    <table>
+        <tr>
+            <td width="150"></td>
+            <td width="150"></td>
+            <td width="150"></td>
+            <td width="150"><b>Grand Total @grandTotal</b></td>
+        </tr>
+    </table>
+}
