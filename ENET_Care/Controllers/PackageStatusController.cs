@@ -92,14 +92,32 @@ namespace ENET_Care.Controllers
         public ActionResult Receive(string packageIdBarcode, string packageIdDropdown)
         {
             string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-            
-            if(packageIdBarcode == "")
-                PackageStatusLogic.ReceivePackage(Int32.Parse(packageIdDropdown), staffId);
-            else
-                PackageStatusLogic.ReceivePackage(Int32.Parse(packageIdBarcode), staffId);
+            SetUpPackagesDropDown();
+
+            try
+            {
+                if (packageIdBarcode == "")
+                    PackageStatusLogic.ReceivePackage(Int32.Parse(packageIdDropdown), staffId);
+                else
+                    PackageStatusLogic.ReceivePackage(Int32.Parse(packageIdBarcode), staffId);
+            }
+            catch (FormatException) //If the barcode isn't a number
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return View();
+            }
+            catch (OverflowException) //The barcode is an int32, cannot exceed 2^31 - 1
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return View();
+            }
+            catch
+            {
+                ViewBag.Error = "The barcode you have entered doesn't exist/has not been registered";
+                return View();
+            }
 
             ViewBag.ReceiveUpdated = true;
-            SetUpPackagesDropDown();
             return View();
         }
         public ActionResult Discard()
