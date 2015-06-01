@@ -111,7 +111,7 @@ namespace ENET_Care.Controllers
                 ViewBag.Error = "Please enter a valid barcode";
                 return View();
             }
-            catch
+            catch (InvalidOperationException) //If no package record exists
             {
                 ViewBag.Error = "The barcode you have entered doesn't exist/has not been registered";
                 return View();
@@ -130,14 +130,32 @@ namespace ENET_Care.Controllers
         public ActionResult Discard(string packageIdBarcode, string packageIdDropdown)
         {
             string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            SetUpPackagesDropDown();
 
-            if (packageIdBarcode == "")
-                PackageStatusLogic.DiscardPackage(Int32.Parse(packageIdDropdown), staffId);
-            else
-                PackageStatusLogic.DiscardPackage(Int32.Parse(packageIdBarcode), staffId);
+            try
+            {
+                if (packageIdBarcode == "")
+                    PackageStatusLogic.DiscardPackage(Int32.Parse(packageIdDropdown), staffId);
+                else
+                    PackageStatusLogic.DiscardPackage(Int32.Parse(packageIdBarcode), staffId);
+            }
+            catch (FormatException) //If the barcode isn't a number
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return View();
+            }
+            catch (OverflowException) //The barcode is an int32, cannot exceed 2^31 - 1
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return View();
+            }
+            catch (InvalidOperationException) //If no package record exists
+            {
+                ViewBag.Error = "The barcode you have entered doesn't exist/has not been registered";
+                return View();
+            }
 
             ViewBag.DiscardUpdated = true;
-            SetUpPackagesDropDown();
             return View();
         }
         public ActionResult Distribute()
