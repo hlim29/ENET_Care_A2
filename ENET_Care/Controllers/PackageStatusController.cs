@@ -117,6 +117,7 @@ namespace ENET_Care.Controllers
                 return View();
             }
 
+            SetUpPackagesDropDown();
             ViewBag.ReceiveUpdated = true;
             return View();
         }
@@ -155,6 +156,7 @@ namespace ENET_Care.Controllers
                 return View();
             }
 
+            SetUpPackagesDropDown();
             ViewBag.DiscardUpdated = true;
             return View();
         }
@@ -191,7 +193,10 @@ namespace ENET_Care.Controllers
             {
                 ViewBag.Error = "The barcode you have entered doesn't exist/has not been registered";
                 return View();
+            
             }
+
+            SetUpPackagesDropDown();
             ViewBag.DistributeUpdated = true;
             return View();
         }
@@ -200,6 +205,9 @@ namespace ENET_Care.Controllers
             using (var context = new Entities())
             {
                 ViewBag.Packages = (from d in context.PackageStatus
+                                    where d.Status != (int)PackageStatusLogic.StatusEnum.Discarded &&
+                                    d.Status != (int)PackageStatusLogic.StatusEnum.Distributed &&
+                                    d.Status != (int)PackageStatusLogic.StatusEnum.Lost
                                        select new SelectListItem { Value = d.PackageID.ToString(), Text = d.PackageID.ToString()}).ToList();
             }
         }
