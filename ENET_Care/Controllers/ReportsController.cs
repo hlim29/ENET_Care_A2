@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ENET_Care.Controllers
 {
+    [Authorize(Roles="manager")]
     public class ReportsController : Controller
     {
         // GET: Reports

@@ -10,6 +10,7 @@ using ENET_Care.Data;
 
 namespace ENET_Care.Controllers
 {
+    [Authorize]
     public class PagesController : Controller
     {
         // GET: Pages

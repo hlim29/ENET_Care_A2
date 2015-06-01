@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ENET_Care.Controllers
 {
+    [Authorize]
     public class PackageStatusController : Controller
     {
         public Func<string> GetUserId;

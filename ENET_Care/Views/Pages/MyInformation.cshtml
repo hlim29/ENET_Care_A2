@@ -13,6 +13,7 @@
 </div>
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary()
     <h4>@Html.LabelFor(m => m.FirstName)</h4>
     @Html.TextBoxFor(m => m.FirstName)
     <br />

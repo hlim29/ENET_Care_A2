@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ENET_Care.Controllers
 {
+    [Authorize]
     public class PackageController : Controller
     {
         private PackageLogic packages;
