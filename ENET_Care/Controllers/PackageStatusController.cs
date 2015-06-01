@@ -168,14 +168,31 @@ namespace ENET_Care.Controllers
         public ActionResult Distribute(string packageIdBarcode, string packageIdDropdown)
         {
             string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
-
-            if (packageIdBarcode == "")
-                PackageStatusLogic.DistributePackage(Int32.Parse(packageIdDropdown), staffId);
-            else
-                PackageStatusLogic.DistributePackage(Int32.Parse(packageIdBarcode), staffId);
-           
-            ViewBag.DistributeUpdated = true;
             SetUpPackagesDropDown();
+
+            try
+            {
+                if (packageIdBarcode == "")
+                    PackageStatusLogic.DistributePackage(Int32.Parse(packageIdDropdown), staffId);
+                else
+                    PackageStatusLogic.DistributePackage(Int32.Parse(packageIdBarcode), staffId);
+            }
+            catch (FormatException) //If the barcode isn't a number
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return View();
+            }
+            catch (OverflowException) //The barcode is an int32, cannot exceed 2^31 - 1
+            {
+                ViewBag.Error = "Please enter a valid barcode";
+                return View();
+            }
+            catch (InvalidOperationException) //If no package record exists
+            {
+                ViewBag.Error = "The barcode you have entered doesn't exist/has not been registered";
+                return View();
+            }
+            ViewBag.DistributeUpdated = true;
             return View();
         }
         private void SetUpPackagesDropDown()

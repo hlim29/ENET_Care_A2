@@ -4,11 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Distribute</h2>
-
+<p class="alert-danger">@ViewBag.Error</p>
 <div>
     @if (ViewBag.DistributeUpdated == true)
     {
-        <p><font color="red"> Database updated! </font></p>
+        <p><font color="green"> Database updated! </font></p>
     }
 </div>
 @using (Html.BeginForm())
