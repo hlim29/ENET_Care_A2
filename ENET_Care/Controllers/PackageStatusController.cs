@@ -11,11 +11,13 @@ namespace ENET_Care.Controllers
 {
     public class PackageStatusController : Controller
     {
+        public Func<string> GetUserId;
         private IEnumerable<PackageStandardType> medications;
         //private List<Package> packagesInStock;
         public PackageStatusController()
         {
             medications = MedicationLogic.GetAllMedications();
+            GetUserId = () => User.Identity.GetUserId();
         }
         // GET: PackageStatus
         public ActionResult Index()
@@ -91,7 +93,7 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult Receive(string packageIdBarcode, string packageIdDropdown)
         {
-            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            string staffId = GetUserId();
             SetUpPackagesDropDown();
 
             try
@@ -130,7 +132,7 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult Discard(string packageIdBarcode, string packageIdDropdown)
         {
-            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            string staffId = GetUserId();
             SetUpPackagesDropDown();
 
             try
@@ -169,7 +171,7 @@ namespace ENET_Care.Controllers
         [HttpPost]
         public ActionResult Distribute(string packageIdBarcode, string packageIdDropdown)
         {
-            string staffId = UserLogic.GetUserById(User.Identity.GetUserId()).Id;
+            string staffId = GetUserId();
             SetUpPackagesDropDown();
 
             try
